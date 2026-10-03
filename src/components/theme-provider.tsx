@@ -6,6 +6,7 @@ import {
   normalizeSlot,
   resolveTheme,
   type Scheme,
+  type ThemeAliases,
   storageKeys,
   SYSTEM,
   type ThemeChoice,
@@ -36,13 +37,23 @@ function write(key: string, value: string) {
  *
  * `app` prefixes the localStorage keys (`<app>-theme`), so each app on the
  * same origin keeps its own choice. It must match the app's index.html.
+ * `aliases` maps ids the app stored before (see `ThemeAliases`); index.html
+ * needs the same mapping for the first paint.
  */
-export function ThemeProvider({ app, children }: { app: string; children: React.ReactNode }) {
+export function ThemeProvider({
+  app,
+  aliases,
+  children,
+}: {
+  app: string;
+  aliases?: ThemeAliases;
+  children: React.ReactNode;
+}) {
   const keys = useMemo(() => storageKeys(app), [app]);
-  const [choice, setChoice] = useState<ThemeChoice>(() => normalizeChoice(read(keys.theme)));
+  const [choice, setChoice] = useState<ThemeChoice>(() => normalizeChoice(read(keys.theme), aliases));
   const [pair, setPairState] = useState<ThemePair>(() => ({
-    light: normalizeSlot('light', read(keys.light)),
-    dark: normalizeSlot('dark', read(keys.dark)),
+    light: normalizeSlot('light', read(keys.light), aliases),
+    dark: normalizeSlot('dark', read(keys.dark), aliases),
   }));
   const [system, setSystem] = useState<Scheme>(systemScheme);
   const resolved = resolveTheme(choice, pair, system);

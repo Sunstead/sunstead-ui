@@ -161,16 +161,25 @@ export function techThemes(): ThemeDef[] {
   return THEMES.filter((t) => t.style === 'tech');
 }
 
-/** A stored choice, made valid: `system` stays, anything unknown is the default. */
-export function normalizeChoice(value: string | null | undefined): ThemeChoice {
+/**
+ * Old stored values an app still accepts, mapped to current ids. Cosmos, for
+ * one, stored `dark`/`light` before 0.10 and `cosmos-*` before it adopted
+ * this package.
+ */
+export type ThemeAliases = Readonly<Record<string, string>>;
+
+/** A stored choice, made valid: `system` stays, aliases map, anything unknown is the default. */
+export function normalizeChoice(value: string | null | undefined, aliases: ThemeAliases = {}): ThemeChoice {
   if (value === SYSTEM) return SYSTEM;
-  return themeById(value) ? value! : DEFAULT_THEME;
+  const id = (value && Object.hasOwn(aliases, value) ? aliases[value] : value) ?? null;
+  return themeById(id) ? id! : DEFAULT_THEME;
 }
 
 /** A stored pair slot, made valid: it must name a rounded theme of that scheme. */
-export function normalizeSlot(scheme: Scheme, value: string | null | undefined): string {
-  const theme = themeById(value);
-  return theme?.scheme === scheme && theme.style === 'rounded' ? value! : DEFAULT_PAIR[scheme];
+export function normalizeSlot(scheme: Scheme, value: string | null | undefined, aliases: ThemeAliases = {}): string {
+  const id = value && Object.hasOwn(aliases, value) ? aliases[value] : value;
+  const theme = themeById(id);
+  return theme?.scheme === scheme && theme.style === 'rounded' ? id! : DEFAULT_PAIR[scheme];
 }
 
 export function resolveTheme(choice: ThemeChoice, pair: ThemePair, systemScheme: Scheme): ThemeDef {
