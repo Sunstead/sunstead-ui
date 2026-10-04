@@ -102,13 +102,13 @@ export type ThemeAliases = Readonly<Record<string, string>>;
 /** A stored choice, made valid: `system` stays, aliases map, anything unknown is the default. */
 export function normalizeChoice(value: string | null | undefined, aliases: ThemeAliases = {}): ThemeChoice {
   if (value === SYSTEM) return SYSTEM;
-  const id = (value && Object.hasOwn(aliases, value) ? aliases[value] : value) ?? null;
+  const id = (value && Object.prototype.hasOwnProperty.call(aliases, value) ? aliases[value] : value) ?? null;
   return themeById(id) ? id! : DEFAULT_THEME;
 }
 
 /** A stored pair slot, made valid: it must name a theme of that scheme. */
 export function normalizeSlot(scheme: Scheme, value: string | null | undefined, aliases: ThemeAliases = {}): string {
-  const id = value && Object.hasOwn(aliases, value) ? aliases[value] : value;
+  const id = value && Object.prototype.hasOwnProperty.call(aliases, value) ? aliases[value] : value;
   const theme = themeById(id);
   return theme?.scheme === scheme ? id! : DEFAULT_PAIR[scheme];
 }
