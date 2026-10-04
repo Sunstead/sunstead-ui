@@ -2,7 +2,8 @@ import { Toaster as Sonner, type ToasterProps } from "sonner"
 import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from "lucide-react"
 import { useTheme } from "../../hooks/use-theme"
 
-// Follows the Sunstead theme rather than next-themes; toasts are glass.
+// Follows the Sunstead theme rather than next-themes. Toasts are translucent
+// and blurred, like menus and popovers.
 const Toaster = ({ ...props }: ToasterProps) => {
   const { resolved } = useTheme()
 
@@ -19,13 +20,13 @@ const Toaster = ({ ...props }: ToasterProps) => {
       }}
       style={
         {
-          "--normal-bg": "var(--popover)",
+          "--normal-bg": "color-mix(in oklab, var(--popover) 70%, transparent)",
           "--normal-text": "var(--popover-foreground)",
           "--normal-border": "var(--border)",
           "--border-radius": "var(--radius)",
         } as React.CSSProperties
       }
-      toastOptions={{ classNames: { toast: "glass" } }}
+      toastOptions={{ classNames: { toast: "backdrop-blur-2xl backdrop-saturate-150" } }}
       {...props}
     />
   )

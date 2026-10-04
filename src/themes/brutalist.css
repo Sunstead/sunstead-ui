@@ -1,0 +1,96 @@
+/* Brutalist (from Solstice).
+   Neo-brutalist: stark white, ink-black borders at full opacity, one flat
+   poster-yellow accent, and zero radius everywhere. No soft edges and no
+   gradients-by-proxy (chroma is otherwise low) -- the yellow is the only loud
+   thing in the room, which is the point. */
+
+[data-theme='brutalist'] {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.85 0.19 96);
+  --primary-foreground: oklch(0.145 0 0);
+  --secondary: oklch(0.145 0 0);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.94 0 0);
+  --muted-foreground: oklch(0.32 0 0);
+  --accent: oklch(0.72 0.24 340);
+  --accent-foreground: oklch(0.145 0 0);
+  --destructive: oklch(0.58 0.24 25);
+  --border: oklch(0.145 0 0);
+  --input: oklch(0.145 0 0);
+  --ring: oklch(0.145 0 0);
+  --chart-1: oklch(0.85 0.19 96);
+  --chart-2: oklch(0.72 0.24 340);
+  --chart-3: oklch(0.62 0.22 255);
+  --chart-4: oklch(0.7 0.19 150);
+  --chart-5: oklch(0.58 0.24 25);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.145 0 0);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.85 0.19 96);
+  --sidebar-accent-foreground: oklch(0.145 0 0);
+  --sidebar-border: oklch(0.145 0 0);
+  --sidebar-ring: oklch(0.145 0 0);
+  --success:#15803d;
+  --warning: oklch(0.78 0.17 75);
+  --error:#b91c1c;
+  --cpu:oklch(0.48 0.14 258);
+  --ram:oklch(0.5 0.18 330);
+  --network:oklch(0.53 0.1 195);
+  --disk:oklch(0.6 0.16 50);
+  --mark-0: #3c3c3c;
+  --mark-1: #000000;
+  --ansi-0: #3f3f46;
+  --ansi-1: #b91c1c;
+  --ansi-2: #15803d;
+  --ansi-3: #a16207;
+  --ansi-4: #1d4ed8;
+  --ansi-5: #a21caf;
+  --ansi-6: #0e7490;
+  --ansi-7: #52525b;
+  --ansi-8: #71717a;
+  --ansi-9: #dc2626;
+  --ansi-10: #16a34a;
+  --ansi-11: #ca8a04;
+  --ansi-12: #2563eb;
+  --ansi-13: #c026d3;
+  --ansi-14: #0891b2;
+  --ansi-15: #18181b;
+  --glass-blur: 12px;
+  --glass-tint: transparent;
+  --space: oklch(0.97 0.006 272);
+  --star: oklch(0.45 0.04 272);
+  --orbit: oklch(0.45 0.04 272 / 0.18);
+  --planet-light: 68%;
+  --planet-mid: 52%;
+  --planet-shade: 26%;
+  --planet-atmosphere: 0.35;
+  --holo-space: #0c0c10;
+  --holo-primary: oklch(0.88 0.006 286);
+  --holo-secondary: oklch(0.74 0.03 280);
+  --holo-text: oklch(0.97 0.002 286);
+  --holo-dim: oklch(0.56 0.014 286);
+  --holo-glow: 0.5;
+  --border-color: oklch(0.145 0 0);
+  --border-opacity: 100%;
+  --syntax-keyword: oklch(0.62 0.22 255);
+  --syntax-string: oklch(0.6 0.19 150);
+  --syntax-number: oklch(0.72 0.24 340);
+  --syntax-function: oklch(0.145 0 0);
+  --syntax-type: oklch(0.55 0.2 255);
+  --syntax-property: oklch(0.5 0.02 0);
+  --syntax-constant: oklch(0.58 0.24 25);
+  --syntax-tag: oklch(0.72 0.24 340);
+  --canvas-color-1: oklch(0.58 0.24 25);
+  --canvas-color-2: oklch(0.85 0.19 96);
+  --canvas-color-3: oklch(0.7 0.19 150);
+  --canvas-color-4: oklch(0.62 0.22 255);
+  --canvas-color-5: oklch(0.72 0.24 340);
+  --canvas-color-6: oklch(0.145 0 0);
+  --radius: 0rem;
+}

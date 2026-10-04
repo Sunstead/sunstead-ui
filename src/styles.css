@@ -7,7 +7,9 @@
      @source '../../packages/sunstead-ui/src';
 
    Lifted from Cosmos (app/src/App.css), minus the Cosmos-only chrome
-   (title bar, constellation, metric colours). */
+   (title bar, constellation, metric colours). Since 0.3.0 the components
+   are Solstice's (shadcn base-vega with translucent menus), and so is the
+   base radius. */
 
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
@@ -29,6 +31,13 @@
 @import './themes/terminal.css';
 @import './themes/red-alert.css';
 @import './themes/blueprint.css';
+@import './themes/stone.css';
+@import './themes/ember.css';
+@import './themes/concrete.css';
+@import './themes/inferno.css';
+@import './themes/orchard.css';
+@import './themes/brutalist.css';
+@import './themes/bubblegum.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -84,12 +93,29 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
+
+  /* Code syntax and JSON Canvas colours, for editors and boards. */
+  --color-syntax-keyword: var(--syntax-keyword);
+  --color-syntax-string: var(--syntax-string);
+  --color-syntax-number: var(--syntax-number);
+  --color-syntax-function: var(--syntax-function);
+  --color-syntax-type: var(--syntax-type);
+  --color-syntax-property: var(--syntax-property);
+  --color-syntax-constant: var(--syntax-constant);
+  --color-syntax-tag: var(--syntax-tag);
+  --color-canvas-1: var(--canvas-color-1);
+  --color-canvas-2: var(--canvas-color-2);
+  --color-canvas-3: var(--canvas-color-3);
+  --color-canvas-4: var(--canvas-color-4);
+  --color-canvas-5: var(--canvas-color-5);
+  --color-canvas-6: var(--canvas-color-6);
 }
 
-/* Layout tokens, theme-independent. */
-:root {
+/* Layout tokens. :where() keeps them below a theme that sets its own
+   --radius (Brutalist, Bubblegum and others). */
+:where(:root) {
   --control-h: 2rem;
-  --radius: 0.45rem;
+  --radius: 0.5rem;
   --heading-family: 'Inter Variable', sans-serif;
 }
 

@@ -1,7 +1,6 @@
-"use client"
-
 import * as React from "react"
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
+
 import { cn } from "../../lib/utils"
 
 function Popover({ ...props }: PopoverPrimitive.Root.Props) {
@@ -12,12 +11,16 @@ function PopoverTrigger({ ...props }: PopoverPrimitive.Trigger.Props) {
   return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />
 }
 
+function PopoverClose({ ...props }: PopoverPrimitive.Close.Props) {
+  return <PopoverPrimitive.Close data-slot="popover-close" {...props} />
+}
+
 function PopoverContent({
-  className,
   align = "center",
   alignOffset = 0,
   side = "bottom",
   sideOffset = 4,
+  className,
   ...props
 }: PopoverPrimitive.Popup.Props &
   Pick<
@@ -27,16 +30,16 @@ function PopoverContent({
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Positioner
+        className="isolate z-50 outline-none"
         align={align}
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
-        className="isolate z-50"
       >
         <PopoverPrimitive.Popup
           data-slot="popover-content"
           className={cn(
-            "glass z-50 flex w-72 max-w-(--available-width) origin-(--transform-origin) flex-col gap-2.5 rounded-lg bg-popover p-2.5 text-sm text-popover-foreground shadow-md ring-1 ring-foreground/10 wrap-anywhere outline-hidden duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+            "z-50 max-h-(--available-height) w-72 origin-(--transform-origin) rounded-md p-3 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 outline-none data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 animate-none! relative bg-popover/70 before:pointer-events-none before:absolute before:inset-0 before:-z-1 before:rounded-[inherit] before:backdrop-blur-2xl before:backdrop-saturate-150",
             className
           )}
           {...props}
@@ -50,7 +53,7 @@ function PopoverHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="popover-header"
-      className={cn("flex flex-col gap-0.5 text-sm", className)}
+      className={cn("flex flex-col gap-1 text-sm", className)}
       {...props}
     />
   )
@@ -81,9 +84,10 @@ function PopoverDescription({
 
 export {
   Popover,
+  PopoverTrigger,
+  PopoverClose,
   PopoverContent,
-  PopoverDescription,
   PopoverHeader,
   PopoverTitle,
-  PopoverTrigger,
+  PopoverDescription,
 }

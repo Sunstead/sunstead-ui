@@ -24,25 +24,37 @@ npx shadcn@latest add <component> --overwrite
 - **Relative imports only** inside the package (`../../lib/utils`), never
   `@/`: in an app, `@/` means the app's own `src/`. The tsconfig `@/*` path
   exists only so the shadcn CLI can write files.
-- **Primitives** live in `src/components/ui/`, style `base-nova`. After
+- **Primitives** live in `src/components/ui/`, style `base-vega` with
+  `menuColor: default-translucent`. They are Solstice's, class for class,
+  so Solstice looks exactly as it did before it adopted this package: change
+  one only on purpose, knowing every app changes with it. After
   `shadcn add`, rewrite its imports: `from "cn"` → `from "../../lib/utils"`,
   `@/components/ui/x` → `./x`, `@/hooks/x` → `../../hooks/x`. Then reapply
   the Sunstead tweaks below, since `--overwrite` drops them.
-- **Sunstead tweaks to shadcn** (keep when regenerating):
-  - `glass` on floating surfaces: card, dialog, popover, dropdown-menu
-    content and sub-content, select content, hover-card, sonner toasts.
-  - Overflow: dialog `max-h-[calc(100%-2rem)] overflow-y-auto
-    grid-cols-[minmax(0,1fr)] wrap-anywhere` (plus `pr-8` on the header when
-    it has a close button); popover and hover-card `max-w-(--available-width)`;
-    select trigger `min-w-0` with a clipped value, select content
-    `max-w-[calc(100vw-2rem)] wrap-anywhere`.
-  - `sonner` follows `useTheme()`, not next-themes.
+- **Tweaks to shadcn** (keep when regenerating):
+  - Floating surfaces are translucent: `bg-popover/70` with a
+    `before:backdrop-blur-2xl` layer (what `default-translucent` generates).
+    Popover and hover-card carry it by hand, since the registry stopped
+    generating it for them. Themes keep `--popover` opaque.
+  - From Solstice: collapsible animates its height (`keepMounted`), popover
+    has `PopoverClose`, and the destructive menu items stay neutral on hover.
+  - `resizable-sidebar` is Solstice's fork of `sidebar`: a draggable rail
+    (`SidebarRail` `minWidth`/`maxWidth`), with width reported through
+    `onWidthChange` so the app persists it.
+  - `sonner` follows `useTheme()`, not next-themes, and is translucent too.
   - `use-mobile` uses `useSyncExternalStore`.
+  - `.glass` stays as a utility for app chrome (Cosmos uses it); the
+    primitives no longer use it.
 - **Themes:** one `[data-theme='<id>']` block in `src/themes/<file>.css`,
   imported from `styles.css`, plus an entry in `src/lib/themes.ts`. Every
   theme defines exactly the same tokens as `sunstead-dark`
   (`themes.test.ts`), meets WCAG AA for text on its surfaces, and keeps the
-  metric colours apart. Tech themes (`style: 'tech'`) are square and mono.
+  metric colours apart. Solstice's themes are exempt only where they already
+  fell short (`SOLSTICE_FLOORS`). `--radius` is optional (the base is
+  0.5rem). The border is given twice, as `--border` and as
+  `--border-color` plus `--border-opacity`, and the test checks they agree.
+  `--popover` is opaque. Tech themes (`style: 'tech'`) are square and mono,
+  but are grouped by scheme like the rest; there is no Tech group.
 - **Tech brackets** in `styles.css` select by `data-slot`; a new floating
   primitive gets its slot added there.
 - **Releases:** bump `version`, tag `vX.Y.Z`, and update each app's pinned

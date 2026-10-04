@@ -4,7 +4,7 @@
   --foreground: oklch(0.24 0.03 60);
   --card: #fffcf6;
   --card-foreground: oklch(0.24 0.03 60);
-  --popover: oklch(0.995 0.008 85 / 0.82);
+  --popover: #fefcf5;
   --popover-foreground: oklch(0.24 0.03 60);
   --primary: oklch(0.78 0.15 70);
   --primary-foreground: #2a1600;
@@ -16,6 +16,8 @@
   --accent-foreground: oklch(0.3 0.04 60);
   --destructive: oklch(0.56 0.2 28);
   --border: oklch(0.89 0.02 75);
+  --border-color: oklch(0.89 0.02 75);
+  --border-opacity: 100%;
   --input: oklch(0.87 0.025 75);
   --ring: oklch(0.72 0.13 70);
   --chart-1: oklch(0.88 0.08 85);
@@ -78,4 +80,20 @@
   --holo-text: #fff0d9;
   --holo-dim: #5a4126;
   --holo-glow: 0.85;
+
+  /* Code syntax, and JSON Canvas colours 1-6 (red, orange, yellow, green, cyan, purple). */
+  --syntax-keyword: oklch(0.475 0.156 300);
+  --syntax-string: oklch(0.465 0.116 150);
+  --syntax-number: oklch(0.525 0.136 62);
+  --syntax-function: oklch(0.475 0.148 245);
+  --syntax-type: oklch(0.495 0.1 195);
+  --syntax-property: oklch(0.495 0.156 330);
+  --syntax-constant: oklch(0.53 0.148 40);
+  --syntax-tag: oklch(0.5 0.172 20);
+  --canvas-color-1: oklch(0.545 0.184 25);
+  --canvas-color-2: oklch(0.585 0.152 52);
+  --canvas-color-3: oklch(0.645 0.132 82);
+  --canvas-color-4: oklch(0.545 0.13 148);
+  --canvas-color-5: oklch(0.555 0.11 230);
+  --canvas-color-6: oklch(0.515 0.164 305);
 }

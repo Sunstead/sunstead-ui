@@ -4,8 +4,11 @@ import * as React from "react"
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
+import { PanelLeftIcon } from "lucide-react"
 
 import { useIsMobile } from "../../hooks/use-mobile"
+import { useSidebarResize } from "../../hooks/use-sidebar-resize"
+import { mergeButtonRefs } from "../../lib/merge-button-refs"
 import { cn } from "../../lib/utils"
 import { Button } from "./button"
 import { Input } from "./input"
@@ -23,23 +26,27 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "./tooltip"
-import { PanelLeftIcon } from "lucide-react"
 
-const SIDEBAR_COOKIE_NAME = "sidebar_state"
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "16rem"
+const SIDEBAR_WIDTH = "18rem"
 const SIDEBAR_WIDTH_MOBILE = "18rem"
 const SIDEBAR_WIDTH_ICON = "3rem"
-const SIDEBAR_KEYBOARD_SHORTCUT = "b"
+// const SIDEBAR_KEYBOARD_SHORTCUT = "b"
+
+const MIN_SIDEBAR_WIDTH = "12rem"
+const MAX_SIDEBAR_WIDTH = "40rem"
 
 type SidebarContextProps = {
   state: "expanded" | "collapsed"
   open: boolean
-  setOpen: (open: boolean) => void
+  setOpen: (open: boolean | ((value: boolean) => boolean)) => void
   openMobile: boolean
   setOpenMobile: (open: boolean) => void
   isMobile: boolean
   toggleSidebar: () => void
+  width: string
+  setWidth: (width: string) => void
+  isDraggingRail: boolean
+  setIsDraggingRail: (isDraggingRail: boolean) => void
 }
 
 const SidebarContext = React.createContext<SidebarContextProps | null>(null)
@@ -60,14 +67,19 @@ function SidebarProvider({
   className,
   style,
   children,
+  defaultWidth = SIDEBAR_WIDTH,
+  onWidthChange,
   ...props
 }: React.ComponentProps<"div"> & {
   defaultOpen?: boolean
   open?: boolean
   onOpenChange?: (open: boolean) => void
+  defaultWidth?: string
+  onWidthChange?: (width: number) => void;
 }) {
   const isMobile = useIsMobile()
   const [openMobile, setOpenMobile] = React.useState(false)
+  const [isDraggingRail, setIsDraggingRail] = React.useState(false)
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
@@ -81,20 +93,28 @@ function SidebarProvider({
       } else {
         _setOpen(openState)
       }
-
-      // This sets the cookie to keep the sidebar state.
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
     },
     [setOpenProp, open]
+  )
+
+  // Width is uncontrolled but reports every change upward via onWidthChange,
+  // so callers can persist it without an effect diffing old vs. new.
+  const [width, _setWidth] = React.useState(defaultWidth)
+  const setWidth = React.useCallback(
+    (value: string) => {
+      _setWidth(value)
+      onWidthChange?.(parseInt(value, 10))
+    },
+    [onWidthChange]
   )
 
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open)
-  }, [isMobile, setOpen, setOpenMobile])
+  }, [isMobile, setOpen])
 
   // Adds a keyboard shortcut to toggle the sidebar.
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
         event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
@@ -107,7 +127,7 @@ function SidebarProvider({
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [toggleSidebar])
+  }, [toggleSidebar]) */
 
   // We add a state so that we can do data-state="expanded" or "collapsed".
   // This makes it easier to style the sidebar with Tailwind classes.
@@ -122,8 +142,22 @@ function SidebarProvider({
       openMobile,
       setOpenMobile,
       toggleSidebar,
+      width,
+      setWidth,
+      isDraggingRail,
+      setIsDraggingRail,
     }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+    [
+      state,
+      open,
+      setOpen,
+      isMobile,
+      openMobile,
+      toggleSidebar,
+      width,
+      setWidth,
+      isDraggingRail,
+    ]
   )
 
   return (
@@ -132,13 +166,13 @@ function SidebarProvider({
         data-slot="sidebar-wrapper"
         style={
           {
-            "--sidebar-width": SIDEBAR_WIDTH,
+            "--sidebar-width": width,
             "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
             ...style,
           } as React.CSSProperties
         }
         className={cn(
-          "group/sidebar-wrapper flex min-h-svh w-full has-data-[variant=inset]:bg-sidebar",
+          "group/sidebar-wrapper flex min-h-full w-full has-data-[variant=inset]:bg-sidebar",
           className
         )}
         {...props}
@@ -162,7 +196,8 @@ function Sidebar({
   variant?: "sidebar" | "floating" | "inset"
   collapsible?: "offcanvas" | "icon" | "none"
 }) {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+  const { isMobile, state, openMobile, setOpenMobile, isDraggingRail } =
+    useSidebar()
 
   if (collapsible === "none") {
     return (
@@ -213,28 +248,31 @@ function Sidebar({
       data-variant={variant}
       data-side={side}
       data-slot="sidebar"
+      data-dragging={isDraggingRail}
     >
       {/* This is what handles the sidebar gap on desktop */}
       <div
         data-slot="sidebar-gap"
         className={cn(
-          "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear",
+          "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-in-out",
           "group-data-[collapsible=offcanvas]:w-0",
           "group-data-[side=right]:rotate-180",
           variant === "floating" || variant === "inset"
             ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
-            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
+            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)",
+          "group-data-[dragging=true]:duration-0! group-data-[dragging=true]_*:!duration-0"
         )}
       />
       <div
         data-slot="sidebar-container"
         data-side={side}
         className={cn(
-          "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear data-[side=left]:left-0 data-[side=left]:group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)] data-[side=right]:right-0 data-[side=right]:group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)] md:flex",
+          "absolute inset-y-0 z-10 hidden h-full w-(--sidebar-width) transition-[left,right,width] duration-200 ease-in-out data-[side=left]:left-0 data-[side=left]:group-data-[collapsible=offcanvas]:-left-(--sidebar-width) data-[side=right]:right-0 data-[side=right]:group-data-[collapsible=offcanvas]:-right-(--sidebar-width) md:flex",
           // Adjust the padding for floating and inset variants.
           variant === "floating" || variant === "inset"
             ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
             : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
+          "group-data-[dragging=true]:duration-0! group-data-[dragging=true]_*:!duration-0",
           className
         )}
         {...props}
@@ -277,20 +315,50 @@ function SidebarTrigger({
   )
 }
 
-function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
-  const { toggleSidebar } = useSidebar()
+function SidebarRail({
+  className,
+  enableDrag = true,
+  minWidth = MIN_SIDEBAR_WIDTH,
+  maxWidth = MAX_SIDEBAR_WIDTH,
+  ...props
+}: React.ComponentProps<"button"> & {
+  enableDrag?: boolean
+  /** Drag limits, as CSS lengths. */
+  minWidth?: string
+  maxWidth?: string
+}) {
+  const { toggleSidebar, setWidth, state, width, setIsDraggingRail } =
+    useSidebar()
+
+  const { dragRef, handleMouseDown } = useSidebarResize({
+    direction: "right",
+    enableDrag,
+    onResize: setWidth,
+    onToggle: toggleSidebar,
+    currentWidth: width,
+    isCollapsed: state === "collapsed",
+    minResizeWidth: minWidth,
+    maxResizeWidth: maxWidth,
+    setIsDraggingRail,
+  })
+
+  const combinedRef = React.useMemo(
+    () => mergeButtonRefs([dragRef]),
+    [dragRef]
+  )
 
   return (
     <button
+      ref={combinedRef}
       data-sidebar="rail"
       data-slot="sidebar-rail"
       aria-label="Toggle Sidebar"
       tabIndex={-1}
-      onClick={toggleSidebar}
+      onMouseDown={handleMouseDown}
       title="Toggle Sidebar"
       className={cn(
-        "absolute inset-y-0 z-20 hidden w-4 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:start-1/2 after:w-[2px] hover:after:bg-sidebar-border sm:flex ltr:-translate-x-1/2 rtl:-translate-x-1/2",
-        "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",
+        "absolute inset-y-0 z-20 hidden w-4 transition-all ease-in-out group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:inset-s-1/2 after:w-0.5 hover:after:bg-sidebar-border sm:flex ltr:-translate-x-1/2 rtl:-translate-x-1/2",
+        "in-data-[side=left]:cursor-ew-resize in-data-[side=right]:cursor-e-resize",
         "[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize",
         "group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full hover:group-data-[collapsible=offcanvas]:bg-sidebar",
         "[[data-side=left][data-collapsible=offcanvas]_&]:-right-2",
@@ -390,6 +458,20 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+// --- Components below use Base UI's `render` prop + `useRender` hook -----
+// (the replacement for Radix's `asChild`/`Slot`).
+//
+// IMPORTANT: `data-slot` / `data-sidebar` must NOT be passed as literal keys
+// inside the object you hand to `mergeProps<"button">({ ... }, props)` — that
+// object is typed against strict HTML attributes with no `data-*` index
+// signature, which is exactly the
+// `'data-sidebar' does not exist in type ...` error. Instead, pass them
+// through useRender's `state` option (e.g. `state: { slot: "...", sidebar:
+// "..." }`); Base UI auto-maps those state keys to `data-slot`/`data-sidebar`
+// attributes on the rendered element. Plain (non-render-prop) elements below
+// like <div>/<li>/<ul> can still just take `data-slot`/`data-sidebar` as
+// normal JSX props — only the mergeProps object literal is the problem.
+
 function SidebarGroupLabel({
   className,
   render,
@@ -400,7 +482,7 @@ function SidebarGroupLabel({
     props: mergeProps<"div">(
       {
         className: cn(
-          "flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-linear group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+          "flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 ring-sidebar-ring outline-hidden transition-[margin,opacity] duration-200 ease-in-out group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0 focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
           className
         ),
       },
