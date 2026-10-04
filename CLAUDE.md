@@ -49,8 +49,7 @@ npx shadcn@latest add <component> --overwrite
   imported from `styles.css`, plus an entry in `src/lib/themes.ts`. Every
   theme defines exactly the same tokens as `sunstead-dark`
   (`themes.test.ts`), meets WCAG AA for text on its surfaces, and keeps the
-  metric colours apart. Solstice's themes are exempt only where they already
-  fell short (`SOLSTICE_FLOORS`). `--radius` is optional (the base is
+  metric colours apart, with no exemptions. `--radius` is optional (the base is
   0.5rem). The border is given twice, as `--border` and as
   `--border-color` plus `--border-opacity`, and the test checks they agree.
   `--popover` is opaque. Tech themes (`style: 'tech'`) are square and mono,

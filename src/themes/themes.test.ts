@@ -76,18 +76,6 @@ const PAIRS: [text: string, surface: string[]][] = [
   ['--sidebar-accent-foreground', ['--sidebar-accent', '--sidebar']],
 ];
 
-/**
- * Solstice's themes came in with their colours untouched, so Solstice looks
- * exactly as it did. A few fall just short of a check here; each keeps the
- * value it has as a floor instead.
- */
-const SOLSTICE_FLOORS: Record<string, Record<string, number>> = {
-  inferno: { '--primary-foreground on --primary': 3.39 },
-  bubblegum: { '--muted-foreground on --background': 4.48, '--muted-foreground on --sidebar': 4.15 },
-  ember: { sidebar: 0.08 },
-  orchard: { sidebar: 0.042 },
-};
-
 /** Tokens a theme may leave to the base: only the shape. */
 const OPTIONAL = new Set(['--radius']);
 
@@ -172,8 +160,7 @@ describe('themes', () => {
     it.each(PAIRS)('%s on %s meets WCAG AA', (text, surface) => {
       const bg = flatten(tokens, surface);
       const ratio = contrast(over(colour(text), bg), bg);
-      const floor = SOLSTICE_FLOORS[theme.id]?.[`${text} on ${surface[0]}`] ?? 4.5;
-      expect(ratio, `${theme.id}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(floor);
+      expect(ratio, `${theme.id}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(4.5);
     });
 
     it('keeps the hologram dark', () => {
@@ -200,8 +187,7 @@ describe('themes', () => {
 
     it('shows the active sidebar item clearly, apart from a 60% hover', () => {
       // Steps between near-blacks read smaller than the same step in light.
-      const min =
-        theme.id === 'sunstead-light' ? 0 : SOLSTICE_FLOORS[theme.id]?.sidebar ?? (theme.scheme === 'dark' ? 0.1 : 0.05);
+      const min = theme.id === 'sunstead-light' ? 0 : theme.scheme === 'dark' ? 0.1 : 0.05;
       const sidebar = colour('--sidebar');
       const active = flatten(tokens, ['--sidebar-accent', '--sidebar']);
       expect(distance(active, sidebar)).toBeGreaterThanOrEqual(min);
