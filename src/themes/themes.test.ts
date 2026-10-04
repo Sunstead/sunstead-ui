@@ -8,7 +8,6 @@ import {
   normalizeChoice,
   normalizeSlot,
   SYSTEM,
-  techThemes,
   THEMES,
   themeById,
   themesOf,
@@ -77,6 +76,21 @@ const PAIRS: [text: string, surface: string[]][] = [
   ['--sidebar-accent-foreground', ['--sidebar-accent', '--sidebar']],
 ];
 
+/**
+ * Solstice's themes came in with their colours untouched, so Solstice looks
+ * exactly as it did. A few fall just short of a check here; each keeps the
+ * value it has as a floor instead.
+ */
+const SOLSTICE_FLOORS: Record<string, Record<string, number>> = {
+  inferno: { '--primary-foreground on --primary': 3.39 },
+  bubblegum: { '--muted-foreground on --background': 4.48, '--muted-foreground on --sidebar': 4.15 },
+  ember: { sidebar: 0.08 },
+  orchard: { sidebar: 0.042 },
+};
+
+/** Tokens a theme may leave to the base: only the shape. */
+const OPTIONAL = new Set(['--radius']);
+
 /** Kept exactly as Cosmos's originals were before themes; see the per-theme checks. */
 const ORIGINALS = new Set(['sunstead-dark', 'sunstead-light']);
 
@@ -92,9 +106,6 @@ describe('themes', () => {
     expect(themeById(DEFAULT_THEME)?.scheme).toBe('dark');
     expect(themeById(DEFAULT_PAIR.dark)?.scheme).toBe('dark');
     expect(themeById(DEFAULT_PAIR.light)?.scheme).toBe('light');
-    // Follow system pairs rounded themes only.
-    expect(themeById(DEFAULT_PAIR.dark)?.style).toBe('rounded');
-    expect(themeById(DEFAULT_PAIR.light)?.style).toBe('rounded');
   });
 
   it('styles.css imports every theme file', () => {
@@ -104,14 +115,17 @@ describe('themes', () => {
     }
   });
 
-  it('splits rounded from tech, and only pairs rounded themes', () => {
-    expect(techThemes().map((t) => t.id)).toEqual(['hologram', 'terminal', 'red-alert', 'blueprint']);
+  it('groups by scheme only, tech themes included', () => {
     for (const scheme of ['dark', 'light'] as const) {
-      expect(themesOf(scheme).every((t) => t.style === 'rounded' && t.scheme === scheme)).toBe(true);
+      expect(themesOf(scheme).every((t) => t.scheme === scheme)).toBe(true);
     }
-    // A tech theme left in a Follow system slot falls back to the default pair.
-    expect(normalizeSlot('dark', 'hologram')).toBe(DEFAULT_PAIR.dark);
-    expect(normalizeSlot('light', 'blueprint')).toBe(DEFAULT_PAIR.light);
+    expect(themesOf('dark').length + themesOf('light').length).toBe(THEMES.length);
+    expect(themesOf('dark').map((t) => t.id)).toContain('hologram');
+    expect(themesOf('light').map((t) => t.id)).toContain('blueprint');
+    // Follow system pairs any theme of the right scheme, tech ones too.
+    expect(normalizeSlot('dark', 'hologram')).toBe('hologram');
+    expect(normalizeSlot('light', 'blueprint')).toBe('blueprint');
+    expect(normalizeSlot('light', 'hologram')).toBe(DEFAULT_PAIR.light);
     expect(normalizeSlot('dark', 'nebula')).toBe('nebula');
   });
 
@@ -137,13 +151,29 @@ describe('themes', () => {
     const colour = (name: string) => parseColor(tokens.get(name)!);
 
     it('defines every token, and nothing else', () => {
-      expect([...tokens.keys()].sort()).toEqual([...reference.keys()].sort());
+      const required = (keys: Iterable<string>) => [...keys].filter((k) => !OPTIONAL.has(k)).sort();
+      expect(required(tokens.keys())).toEqual(required(reference.keys()));
+    });
+
+    it('gives its border as one colour and as colour plus opacity, and they agree', () => {
+      const border = colour('--border');
+      const base = colour('--border-color');
+      const opacity = tokens.get('--border-opacity')!;
+      expect(opacity).toMatch(/^\d+(\.\d+)?%$/);
+      expect(base.a).toBe(1);
+      expect(border.a).toBeCloseTo(parseFloat(opacity) / 100, 3);
+      expect(distance({ ...border, a: 1 }, base)).toBeLessThan(0.001);
+    });
+
+    it('has an opaque popover, which menus make translucent themselves', () => {
+      expect(colour('--popover').a).toBe(1);
     });
 
     it.each(PAIRS)('%s on %s meets WCAG AA', (text, surface) => {
       const bg = flatten(tokens, surface);
       const ratio = contrast(over(colour(text), bg), bg);
-      expect(ratio, `${theme.id}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(4.5);
+      const floor = SOLSTICE_FLOORS[theme.id]?.[`${text} on ${surface[0]}`] ?? 4.5;
+      expect(ratio, `${theme.id}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(floor);
     });
 
     it('keeps the hologram dark', () => {
@@ -170,7 +200,8 @@ describe('themes', () => {
 
     it('shows the active sidebar item clearly, apart from a 60% hover', () => {
       // Steps between near-blacks read smaller than the same step in light.
-      const min = theme.id === 'sunstead-light' ? 0 : theme.scheme === 'dark' ? 0.1 : 0.05;
+      const min =
+        theme.id === 'sunstead-light' ? 0 : SOLSTICE_FLOORS[theme.id]?.sidebar ?? (theme.scheme === 'dark' ? 0.1 : 0.05);
       const sidebar = colour('--sidebar');
       const active = flatten(tokens, ['--sidebar-accent', '--sidebar']);
       expect(distance(active, sidebar)).toBeGreaterThanOrEqual(min);

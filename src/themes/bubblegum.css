@@ -1,0 +1,96 @@
+/* Bubblegum (from Solstice).
+   Very rounded, very soft: pastel pink and lavender with a huge --radius, so
+   every card, button and input reads as a rounded pill rather than a panel.
+   Chroma is kept moderate throughout -- the shape carries the personality, so
+   the colours don't have to shout to match it. */
+
+[data-theme='bubblegum'] {
+  --background: oklch(0.98 0.012 340);
+  --foreground: oklch(0.34 0.05 330);
+  --card: oklch(0.995 0.006 340);
+  --card-foreground: oklch(0.34 0.05 330);
+  --popover: oklch(0.995 0.006 340);
+  --popover-foreground: oklch(0.34 0.05 330);
+  --primary: oklch(0.58 0.2 350);
+  --primary-foreground: oklch(0.99 0.006 340);
+  --secondary: oklch(0.93 0.035 300);
+  --secondary-foreground: oklch(0.38 0.06 320);
+  --muted: oklch(0.945 0.02 320);
+  --muted-foreground: oklch(0.56 0.05 325);
+  --accent: oklch(0.9 0.05 90);
+  --accent-foreground: oklch(0.4 0.06 320);
+  --destructive: oklch(0.63 0.21 22);
+  --border: oklch(0.72 0.1 335 / 30%);
+  --input: oklch(0.92 0.03 320);
+  --ring: oklch(0.58 0.2 350);
+  --chart-1: oklch(0.58 0.2 350);
+  --chart-2: oklch(0.78 0.1 300);
+  --chart-3: oklch(0.82 0.1 90);
+  --chart-4: oklch(0.76 0.11 190);
+  --chart-5: oklch(0.68 0.14 260);
+  --sidebar: oklch(0.955 0.02 335);
+  --sidebar-foreground: oklch(0.34 0.05 330);
+  --sidebar-primary: oklch(0.58 0.2 350);
+  --sidebar-primary-foreground: oklch(0.99 0.006 340);
+  --sidebar-accent: oklch(0.9 0.05 90);
+  --sidebar-accent-foreground: oklch(0.4 0.06 320);
+  --sidebar-border: oklch(0.88 0.03 330);
+  --sidebar-ring: oklch(0.58 0.2 350);
+  --success:#15803d;
+  --warning: oklch(0.8 0.14 75);
+  --error:#b91c1c;
+  --cpu:oklch(0.48 0.14 258);
+  --ram:oklch(0.5 0.18 330);
+  --network:oklch(0.53 0.1 195);
+  --disk:oklch(0.6 0.16 50);
+  --mark-0: #3c3c3c;
+  --mark-1: #000000;
+  --ansi-0: #3f3f46;
+  --ansi-1: #b91c1c;
+  --ansi-2: #15803d;
+  --ansi-3: #a16207;
+  --ansi-4: #1d4ed8;
+  --ansi-5: #a21caf;
+  --ansi-6: #0e7490;
+  --ansi-7: #52525b;
+  --ansi-8: #71717a;
+  --ansi-9: #dc2626;
+  --ansi-10: #16a34a;
+  --ansi-11: #ca8a04;
+  --ansi-12: #2563eb;
+  --ansi-13: #c026d3;
+  --ansi-14: #0891b2;
+  --ansi-15: #18181b;
+  --glass-blur: 12px;
+  --glass-tint: transparent;
+  --space: oklch(0.97 0.006 272);
+  --star: oklch(0.45 0.04 272);
+  --orbit: oklch(0.45 0.04 272 / 0.18);
+  --planet-light: 68%;
+  --planet-mid: 52%;
+  --planet-shade: 26%;
+  --planet-atmosphere: 0.35;
+  --holo-space: #0c0c10;
+  --holo-primary: oklch(0.88 0.006 286);
+  --holo-secondary: oklch(0.74 0.03 280);
+  --holo-text: oklch(0.97 0.002 286);
+  --holo-dim: oklch(0.56 0.014 286);
+  --holo-glow: 0.5;
+  --border-color: oklch(0.72 0.1 335);
+  --border-opacity: 30%;
+  --syntax-keyword: oklch(0.62 0.17 320);
+  --syntax-string: oklch(0.6 0.12 175);
+  --syntax-number: oklch(0.65 0.15 45);
+  --syntax-function: oklch(0.58 0.16 285);
+  --syntax-type: oklch(0.6 0.1 230);
+  --syntax-property: oklch(0.58 0.14 340);
+  --syntax-constant: oklch(0.62 0.16 25);
+  --syntax-tag: oklch(0.66 0.18 355);
+  --canvas-color-1: oklch(0.68 0.19 15);
+  --canvas-color-2: oklch(0.75 0.13 65);
+  --canvas-color-3: oklch(0.82 0.11 95);
+  --canvas-color-4: oklch(0.72 0.12 165);
+  --canvas-color-5: oklch(0.7 0.12 250);
+  --canvas-color-6: oklch(0.72 0.19 335);
+  --radius: 1.75rem;
+}

@@ -6,7 +6,12 @@
  * that first paint; the app's tests keep them in step.
  *
  * Copied from Cosmos (`app/src/lib/themes.ts`) with the base pair renamed from
- * `cosmos-*` to `sunstead-*` and the storage keys made per app.
+ * `cosmos-*` to `sunstead-*` and the storage keys made per app. Solstice's own
+ * themes joined in 0.3.0; the ones close to a Sunstead theme merged into it
+ * (Solstice maps its old ids, see its settings migrations).
+ *
+ * Pickers group themes by scheme only: a tech theme sits under Dark or Light
+ * with the rest, and Follow system can pair any theme of the right scheme.
  */
 
 export type Scheme = 'dark' | 'light';
@@ -28,99 +33,30 @@ export interface ThemeDef {
 }
 
 export const THEMES: readonly ThemeDef[] = [
-  {
-    id: 'sunstead-dark',
-    name: 'Sunstead Dark',
-    scheme: 'dark',
-    style: 'rounded',
-    description: 'Near-black space, crisp white',
-  },
-  {
-    id: 'nebula',
-    name: 'Nebula',
-    scheme: 'dark',
-    style: 'rounded',
-    description: 'Deep violet with a magenta glow',
-  },
-  {
-    id: 'aurora',
-    name: 'Aurora',
-    scheme: 'dark',
-    style: 'rounded',
-    description: 'Polar night, mint and violet',
-  },
+  // Dark
+  { id: 'sunstead-dark', name: 'Sunstead Dark', scheme: 'dark', style: 'rounded', description: 'Near-black space, crisp white' },
+  { id: 'nebula', name: 'Nebula', scheme: 'dark', style: 'rounded', description: 'Deep violet with a magenta glow' },
+  { id: 'aurora', name: 'Aurora', scheme: 'dark', style: 'rounded', description: 'Polar night, mint and violet' },
   { id: 'mars', name: 'Mars', scheme: 'dark', style: 'rounded', description: 'Rust dust and ochre dusk' },
-  {
-    id: 'event-horizon',
-    name: 'Event Horizon',
-    scheme: 'dark',
-    style: 'rounded',
-    description: 'True black, hot orange',
-  },
-  {
-    id: 'eclipse',
-    name: 'Eclipse',
-    scheme: 'dark',
-    style: 'rounded',
-    description: 'Graphite with a gold corona',
-  },
-  {
-    id: 'deep-field',
-    name: 'Deep Field',
-    scheme: 'dark',
-    style: 'rounded',
-    description: 'Navy dark, ice-blue light',
-  },
-  {
-    id: 'sunstead-light',
-    name: 'Sunstead Light',
-    scheme: 'light',
-    style: 'rounded',
-    description: 'Clean white, ink black',
-  },
+  { id: 'event-horizon', name: 'Event Horizon', scheme: 'dark', style: 'rounded', description: 'True black, hot orange' },
+  { id: 'eclipse', name: 'Eclipse', scheme: 'dark', style: 'rounded', description: 'Graphite with a gold corona' },
+  { id: 'deep-field', name: 'Deep Field', scheme: 'dark', style: 'rounded', description: 'Navy dark, ice-blue light' },
+  { id: 'stone', name: 'Stone', scheme: 'dark', style: 'rounded', description: 'Plain grey, one indigo accent' },
+  { id: 'ember', name: 'Ember', scheme: 'dark', style: 'rounded', description: 'Warm charcoal and amber' },
+  { id: 'concrete', name: 'Concrete', scheme: 'dark', style: 'rounded', description: 'Raw grey, poster yellow, square' },
+  { id: 'inferno', name: 'Inferno', scheme: 'dark', style: 'rounded', description: 'Scorched red, sharp edges' },
+  { id: 'hologram', name: 'Hologram', scheme: 'dark', style: 'tech', description: 'Deep navy, projected cyan' },
+  { id: 'terminal', name: 'Terminal', scheme: 'dark', style: 'tech', description: 'Phosphor green on black' },
+  { id: 'red-alert', name: 'Red Alert', scheme: 'dark', style: 'tech', description: 'Bridge black, crimson alarm' },
+  // Light
+  { id: 'sunstead-light', name: 'Sunstead Light', scheme: 'light', style: 'rounded', description: 'Clean white, ink black' },
   { id: 'solar', name: 'Solar', scheme: 'light', style: 'rounded', description: 'Warm cream and amber' },
-  {
-    id: 'lunar',
-    name: 'Lunar',
-    scheme: 'light',
-    style: 'rounded',
-    description: 'Cool grey with slate blue',
-  },
-  {
-    id: 'comet',
-    name: 'Comet',
-    scheme: 'light',
-    style: 'rounded',
-    description: 'Bright ice-white, teal tail',
-  },
-  {
-    id: 'hologram',
-    name: 'Hologram',
-    scheme: 'dark',
-    style: 'tech',
-    description: 'Deep navy, projected cyan',
-  },
-  {
-    id: 'terminal',
-    name: 'Terminal',
-    scheme: 'dark',
-    style: 'tech',
-    description: 'Phosphor green on black',
-  },
-  {
-    id: 'red-alert',
-    name: 'Red Alert',
-    scheme: 'dark',
-    style: 'tech',
-    description: 'Bridge black, crimson alarm',
-  },
-  {
-    id: 'blueprint',
-    name: 'Blueprint',
-    scheme: 'light',
-    style: 'tech',
-    description: 'Drafting paper, blue ink',
-  },
+  { id: 'lunar', name: 'Lunar', scheme: 'light', style: 'rounded', description: 'Cool grey with slate blue' },
+  { id: 'comet', name: 'Comet', scheme: 'light', style: 'rounded', description: 'Bright ice-white, teal tail' },
+  { id: 'orchard', name: 'Orchard', scheme: 'light', style: 'rounded', description: 'Soft white and leaf green' },
+  { id: 'brutalist', name: 'Brutalist', scheme: 'light', style: 'rounded', description: 'Stark white, ink lines, square' },
+  { id: 'bubblegum', name: 'Bubblegum', scheme: 'light', style: 'rounded', description: 'Candy pink, very round' },
+  { id: 'blueprint', name: 'Blueprint', scheme: 'light', style: 'tech', description: 'Drafting paper, blue ink' },
 ];
 
 export const DEFAULT_THEME = 'sunstead-dark';
@@ -151,14 +87,9 @@ export function themeById(id: string | null | undefined): ThemeDef | undefined {
   return id ? BY_ID.get(id) : undefined;
 }
 
-/** Rounded themes of a scheme: the Dark and Light groups, and what Follow system can pair. */
+/** The themes of a scheme, tech ones included: the Dark and Light groups, and what Follow system can pair. */
 export function themesOf(scheme: Scheme): ThemeDef[] {
-  return THEMES.filter((t) => t.scheme === scheme && t.style === 'rounded');
-}
-
-/** The Tech group. Picked directly; Follow system doesn't pair them. */
-export function techThemes(): ThemeDef[] {
-  return THEMES.filter((t) => t.style === 'tech');
+  return THEMES.filter((t) => t.scheme === scheme);
 }
 
 /**
@@ -171,15 +102,15 @@ export type ThemeAliases = Readonly<Record<string, string>>;
 /** A stored choice, made valid: `system` stays, aliases map, anything unknown is the default. */
 export function normalizeChoice(value: string | null | undefined, aliases: ThemeAliases = {}): ThemeChoice {
   if (value === SYSTEM) return SYSTEM;
-  const id = (value && Object.hasOwn(aliases, value) ? aliases[value] : value) ?? null;
+  const id = (value && Object.prototype.hasOwnProperty.call(aliases, value) ? aliases[value] : value) ?? null;
   return themeById(id) ? id! : DEFAULT_THEME;
 }
 
-/** A stored pair slot, made valid: it must name a rounded theme of that scheme. */
+/** A stored pair slot, made valid: it must name a theme of that scheme. */
 export function normalizeSlot(scheme: Scheme, value: string | null | undefined, aliases: ThemeAliases = {}): string {
-  const id = value && Object.hasOwn(aliases, value) ? aliases[value] : value;
+  const id = value && Object.prototype.hasOwnProperty.call(aliases, value) ? aliases[value] : value;
   const theme = themeById(id);
-  return theme?.scheme === scheme && theme.style === 'rounded' ? id! : DEFAULT_PAIR[scheme];
+  return theme?.scheme === scheme ? id! : DEFAULT_PAIR[scheme];
 }
 
 export function resolveTheme(choice: ThemeChoice, pair: ThemePair, systemScheme: Scheme): ThemeDef {
