@@ -227,6 +227,10 @@ function Sidebar({
       <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
         <SheetContent
           dir={dir}
+          // The drawer's contents stay mounted while it's closed, as the
+          // desktop sidebar's do while collapsed: whatever they register
+          // (commands, listeners) and their scroll position survive.
+          keepMounted
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
