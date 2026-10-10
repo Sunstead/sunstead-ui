@@ -163,6 +163,16 @@ describe('themes', () => {
       expect(ratio, `${theme.id}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(4.5);
     });
 
+    it('keeps a highlighted menu item readable', () => {
+      // Menus are bg-popover/70 over the page, and highlight an item with
+      // bg-foreground/10; the item keeps the menu's text colour.
+      const alpha = (c: Rgba, a: number) => ({ ...c, a: c.a * a });
+      const menu = over(alpha(colour('--popover'), 0.7), colour('--background'));
+      const highlight = over(alpha(colour('--foreground'), 0.1), menu);
+      const ratio = contrast(over(colour('--popover-foreground'), highlight), highlight);
+      expect(ratio, `${theme.id}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(4.5);
+    });
+
     it('keeps the hologram dark', () => {
       const space = colour('--holo-space');
       expect(contrast(space, parseColor('#000000'))).toBeLessThan(1.25);
