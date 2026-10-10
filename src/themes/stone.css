@@ -39,7 +39,7 @@
   --sidebar-ring: oklch(0.56 0.19 275);
   --success: oklch(0.72 0.17 145);
   --warning: oklch(0.78 0.15 75);
-  --error: #c91e27;
+  --error: oklch(0.67 0.22 10);
   --cpu: oklch(0.72 0.12 235);
   --ram: oklch(0.7 0.17 320);
   --network: oklch(0.8 0.13 175);

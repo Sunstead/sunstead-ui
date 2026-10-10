@@ -36,7 +36,7 @@
   --sidebar-border: oklch(0.882 0.019 132);
   --sidebar-ring: oklch(0.495 0.102 152);
   --success:#15803d;
-  --warning: oklch(0.69 0.146 72);
+  --warning: oklch(0.55 0.12 75);
   --error:#b91c1c;
   --cpu:oklch(0.48 0.14 258);
   --ram:oklch(0.5 0.18 330);
