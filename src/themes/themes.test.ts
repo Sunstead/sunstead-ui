@@ -163,6 +163,29 @@ describe('themes', () => {
       expect(ratio, `${theme.id}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(4.5);
     });
 
+    // Apps write states in these colours ("2 down", "Major", an error log
+    // line). The originals are kept as they were.
+    it.skipIf(ORIGINALS.has(theme.id)).each(['--error', '--warning', '--success'])(
+      '%s reads as text on the page and on cards',
+      (status) => {
+        for (const surface of [['--background'], ['--card', '--background']]) {
+          const bg = flatten(tokens, surface);
+          const ratio = contrast(over(colour(status), bg), bg);
+          expect(ratio, `${theme.id} on ${surface[0]}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(4.5);
+        }
+      },
+    );
+
+    it('keeps a highlighted menu item readable', () => {
+      // Menus are bg-popover/70 over the page, and highlight an item with
+      // bg-foreground/10; the item keeps the menu's text colour.
+      const alpha = (c: Rgba, a: number) => ({ ...c, a: c.a * a });
+      const menu = over(alpha(colour('--popover'), 0.7), colour('--background'));
+      const highlight = over(alpha(colour('--foreground'), 0.1), menu);
+      const ratio = contrast(over(colour('--popover-foreground'), highlight), highlight);
+      expect(ratio, `${theme.id}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(4.5);
+    });
+
     it('keeps the hologram dark', () => {
       const space = colour('--holo-space');
       expect(contrast(space, parseColor('#000000'))).toBeLessThan(1.25);
