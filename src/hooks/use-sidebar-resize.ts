@@ -158,6 +158,8 @@ export function useSidebarResize({
   const dragDistanceFromToggle = React.useRef(0);
   const dragOffset = React.useRef(0);
   const railRect = React.useRef<DOMRect | null>(null);
+  /** A tap with a finger or the Pencil never toggles: only a click does. */
+  const pointerType = React.useRef('mouse');
 
   // Refs for auto-collapse threshold
   const autoCollapseThresholdPx = React.useRef(0);
@@ -231,14 +233,19 @@ export function useSidebarResize({
     [widthCookieName, widthCookieMaxAge],
   );
 
-  // Handle mouse down on resize handle
-  const handleMouseDown = React.useCallback(
-    (e: React.MouseEvent) => {
+  // Pointer events, so a finger and the Pencil drag it as a mouse does.
+  const handlePointerDown = React.useCallback(
+    (e: React.PointerEvent) => {
+      if (e.button !== 0) return;
       isInteractingWithRail.current = true;
+      pointerType.current = e.pointerType || 'mouse';
 
       if (!enableDrag) {
         return;
       }
+
+      // Keeps the drag when it leaves the rail.
+      e.currentTarget.setPointerCapture?.(e.pointerId);
 
       // Store initial state
       const currentWidthPx = isCollapsed ? 0 : toPx(currentWidth);
@@ -271,7 +278,7 @@ export function useSidebarResize({
 
   // Handle mouse movement and resizing
   React.useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: PointerEvent) => {
       if (!isInteractingWithRail.current) return;
 
       const deltaX = Math.abs(e.clientX - startX.current);
@@ -432,7 +439,12 @@ export function useSidebarResize({
       if (!isInteractingWithRail.current) return;
 
       // Handle click (not drag) behavior
-      if (!isDragging.current && onToggle && enableToggle) {
+      if (
+        !isDragging.current &&
+        onToggle &&
+        enableToggle &&
+        pointerType.current === 'mouse'
+      ) {
         onToggle();
       }
 
@@ -452,12 +464,14 @@ export function useSidebarResize({
       setIsDraggingRail(false);
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('pointermove', handleMouseMove);
+    document.addEventListener('pointerup', handleMouseUp);
+    document.addEventListener('pointercancel', handleMouseUp);
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('pointermove', handleMouseMove);
+      document.removeEventListener('pointerup', handleMouseUp);
+      document.removeEventListener('pointercancel', handleMouseUp);
     };
   }, [
     onResize,
@@ -480,6 +494,8 @@ export function useSidebarResize({
   return {
     dragRef,
     isDragging,
-    handleMouseDown,
+    handlePointerDown,
+    /** @deprecated The old name: it handles every pointer now. */
+    handleMouseDown: handlePointerDown,
   };
 }
