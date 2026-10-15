@@ -41,6 +41,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Touch density: where touch is the main input, the app sets `data-touch` on
+   <html> (once, so the layout never jumps when a trackpad comes and goes),
+   and the controls a finger hits most grow to about 40pt. Not
+   `pointer-coarse`: an iPad with a trackpad reports a fine pointer. */
+@custom-variant touch (&:where([data-touch] *));
+
 @theme inline {
   /* Card, dialog and sheet titles; tech themes switch it to mono. */
   --font-heading: var(--heading-family);

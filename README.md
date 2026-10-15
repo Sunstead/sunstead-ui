@@ -54,6 +54,12 @@ import { Button } from '@sunstead/ui/components/button';
   can call `applyTheme(themeById(id))` itself. `[data-theme]` blocks work
   on any element, so a picker can preview a theme by setting `data-theme`
   on a swatch.
+- **Touch density:** set `data-touch` on `<html>` where touch is the main
+  input (decide once, at startup) and buttons and sidebar rows grow to about
+  40pt. Write your own touch sizes with the `touch:` variant.
+- **Sidebar `className`** lands on the sidebar's container, which the rail
+  hangs half outside: `overflow-hidden` there clips half the rail. Clip the
+  inner element instead (`*:data-[sidebar=sidebar]:overflow-hidden`).
 - **Working across repos:** `npm link` this repo into the app, or point the
   dependency at `file:../sunstead-ui` locally. Never commit a `file:` path.
 
