@@ -339,6 +339,7 @@ function SidebarTrigger({
 }
 
 function SidebarRail({
+  ref,
   className,
   enableDrag = true,
   minWidth = MIN_SIDEBAR_WIDTH,
@@ -366,8 +367,8 @@ function SidebarRail({
   })
 
   const combinedRef = React.useMemo(
-    () => mergeButtonRefs([dragRef]),
-    [dragRef]
+    () => mergeButtonRefs([dragRef, ref]),
+    [dragRef, ref]
   )
 
   return (
