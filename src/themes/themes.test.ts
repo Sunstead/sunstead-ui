@@ -208,6 +208,17 @@ describe('themes', () => {
       }
     });
 
+    // Islands puts the sidebar's colour on the window and the page's colour
+    // on the panels beside it, so the two have to read as different surfaces.
+    // Both measures, since OKLab overstates steps near black and WCAG
+    // contrast understates them.
+    it('keeps the sidebar visibly apart from the page, for islands', () => {
+      const sidebar = colour('--sidebar');
+      const page = colour('--background');
+      expect(distance(sidebar, page), `${theme.id} distance`).toBeGreaterThanOrEqual(0.065);
+      expect(contrast(sidebar, page), `${theme.id} contrast`).toBeGreaterThanOrEqual(1.12);
+    });
+
     it('shows the active sidebar item clearly, apart from a 60% hover', () => {
       // Steps between near-blacks read smaller than the same step in light.
       const min = theme.id === 'sunstead-light' ? 0 : theme.scheme === 'dark' ? 0.1 : 0.05;
