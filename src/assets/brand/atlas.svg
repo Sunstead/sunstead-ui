@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <defs>
+    <linearGradient id="atlas-bg" x1="9" y1="16" x2="9" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#301109"/><stop offset="1" stop-color="#6e1b14"/></linearGradient>
+    <linearGradient id="atlas-sun" x1="10.2" y1="14" x2="5.8" y2="2" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#e25625"/><stop offset="0.6" stop-color="#f48c23"/><stop offset="1" stop-color="#f3d22b"/></linearGradient>
+  </defs>
+  <rect width="16" height="16" ry="4" fill="url(#atlas-bg)"/>
+  <circle cx="8" cy="8" r="5" fill="none" stroke="url(#atlas-sun)" stroke-width="1.5"/>
+  <path d="M8 3.6 9.7 8 8 12.4 6.3 8Z" fill="url(#atlas-sun)"/>
+</svg>

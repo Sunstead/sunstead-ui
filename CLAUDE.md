@@ -60,3 +60,15 @@ npx shadcn@latest add <component> --overwrite
   tag. Breaking changes (renamed exports, ids or tokens) need a note in the
   tag message and an `aliases` path where stored values are involved.
 - UI copy: sentence case, no em dashes or curly quotes.
+
+## Product icons
+
+`src/assets/brand/<product>.svg` are copies of each Sunstead product's own
+icon (Helion, Solstice, Solstice Sync; Atlas's lives here until it has a
+repo-side source). `npm run sync:brand` refreshes the copies from sibling
+checkouts; `npm run build:brand` turns them into `src/components/brand/*.tsx`
+(generated, committed) so consumers need no SVG loader. Ids are prefixed per
+product. `ProductIcon` renders one (`@sunstead/ui/product-icon`), `PRODUCTS`
+lists them (`@sunstead/ui/products`). Helion's follows the theme through
+`--mark-0`/`--mark-1`; the others are tiles with their own ground. An SVG
+comment must not contain `--` (svgo refuses it).
