@@ -63,12 +63,15 @@ npx shadcn@latest add <component> --overwrite
 
 ## Product icons
 
-`src/assets/brand/<product>.svg` are copies of each Sunstead product's own
-icon (Helion, Solstice, Solstice Sync; Atlas's lives here until it has a
-repo-side source). `npm run sync:brand` refreshes the copies from sibling
-checkouts; `npm run build:brand` turns them into `src/components/brand/*.tsx`
-(generated, committed) so consumers need no SVG loader. Ids are prefixed per
-product. `ProductIcon` renders one (`@sunstead/ui/product-icon`), `PRODUCTS`
-lists them (`@sunstead/ui/products`). Helion's follows the theme through
-`--mark-0`/`--mark-1`; the others are tiles with their own ground. An SVG
-comment must not contain `--` (svgo refuses it).
+`src/assets/brand/` is the one home of every Sunstead icon: each product's app
+icon (`<product>.svg`, a tile with its own ground; Swindle Games' is a glyph)
+and the Sunstead mark (`sunstead.svg`). Change an icon here and everything that
+shows it follows: `ProductIcon` (`@sunstead/ui/product-icon`), `SunsteadMark`
+(`@sunstead/ui/sunstead-mark`), the raw files (`@sunstead/ui/brand/<id>`) and
+the website, which copies them (`npm run sync:icons` there). Solstice, Solstice
+Sync and Atlas draw theirs in their own repos; `npm run sync:brand` copies them
+in from sibling checkouts. Helion's tile, Swindle Games' and the mark are edited
+here. `npm run build:brand` turns the SVGs into `src/components/brand/*.tsx`
+(generated, committed) so consumers need no SVG loader; ids are prefixed per
+icon. `PRODUCTS` lists the products (`@sunstead/ui/products`). An SVG comment
+must not contain `--` (svgo refuses it).

@@ -1,10 +1,92 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-  <!-- Copied from Helion (app/src/assets/icon-mark.svg). The stops read the theme's mark colours; the fallbacks match the dark theme. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Built from Helion app/src/assets/app.icon (as of Helion 2a372ec): its gradient fill (Display P3 converted to
+       sRGB) and the glow, sun, core and ring layers, stacked as Icon Composer orders them. -->
   <defs>
-    <radialGradient id="helion-mark-ink" cx="7.7160196" cy="4.1667252" fx="7.7160196" fy="4.1667252" r="7" gradientTransform="matrix(1.6692094,-0.39952947,0.25125935,1.049746,-6.2105617,4.3801354)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" style="stop-color:var(--mark-0, #ffffff)"/>
-      <stop offset="1" style="stop-color:var(--mark-1, #a1a1a1)"/>
-    </radialGradient>
+    <linearGradient id="hel-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9b3800"/>
+      <stop offset="1" stop-color="#592300"/>
+    </linearGradient>
   </defs>
-  <path fill="url(#helion-mark-ink)" d="M 2.1807541,6.809179 C 1.3365804,7.0353747 0.8275534,7.9170354 1.0537491,8.7612091 1.2799447,9.6053828 2.1616054,10.11441 3.0057791,9.8882141 L 13.269229,7.1381309 c 0.289496,-0.07757 0.573107,0.086173 0.650677,0.3756684 0.07757,0.2894957 -0.08617,0.5731064 -0.375668,0.6506766 l -2.05269,0.5500167 c -0.283418,0.075941 -0.45161,0.3672591 -0.375669,0.6506766 0.07594,0.2834175 0.36726,0.4516101 0.650677,0.3756684 L 13.819246,9.190821 C 14.66342,8.9646252 15.172447,8.0829647 14.946251,7.2387909 14.720055,6.3946172 13.838395,5.8855902 12.994221,6.1117859 L 2.7307707,8.8618691 C 2.441275,8.9394392 2.1576642,8.7756964 2.0800941,8.4862007 2.0025239,8.196705 2.1662667,7.9130942 2.4557624,7.8355241 L 4.5084525,7.2855074 C 4.7918698,7.2095659 4.9600622,6.9182481 4.8841208,6.6348308 4.8081794,6.3514134 4.5168615,6.1832209 4.2334441,6.2591624 Z M 6.8999667,3.8946199 C 5.1745084,4.3569551 3.9866062,5.8048441 3.7798111,7.4698682 3.740988,7.782455 3.9947322,7.973175 4.2992095,7.8915905 L 11.150774,6.0557195 C 11.455251,5.974135 11.579644,5.6821022 11.389737,5.430813 10.378136,4.0922472 8.6254314,3.432283 6.8999667,3.8946199 Z M 4.6102638,10.569187 c 1.0116001,1.338566 2.7643048,1.99853 4.4897696,1.536193 C 10.825491,11.643045 12.013394,10.195156 12.220189,8.5301319 12.259012,8.2175451 12.005267,8.0268251 11.70079,8.1084095 L 4.8492262,9.9442804 C 4.5447489,10.025865 4.4203559,10.317898 4.6102638,10.569187 Z"/>
+  <rect width="1024" height="1024" rx="229" fill="url(#hel-fill)"/>
+  <g transform="scale(64)">
+<defs>
+  <radialGradient id="gl-g" cx="8" cy="8" r="8" gradientUnits="userSpaceOnUse">
+   <stop offset="0" stop-color="#ff8303" stop-opacity="0"/>
+   <stop offset=".66" stop-color="#ff8303" stop-opacity="0"/>
+   <stop offset="0.7400" stop-color="#ff8303" stop-opacity="0.5512"/>
+   <stop offset="0.7638" stop-color="#f98203" stop-opacity="0.4823"/>
+   <stop offset="0.7875" stop-color="#f38002" stop-opacity="0.4134"/>
+   <stop offset="0.8113" stop-color="#ed7f02" stop-opacity="0.3445"/>
+   <stop offset="0.8350" stop-color="#e87e02" stop-opacity="0.2756"/>
+   <stop offset="0.8588" stop-color="#e27c01" stop-opacity="0.2067"/>
+   <stop offset="0.8825" stop-color="#dc7b01" stop-opacity="0.1378"/>
+   <stop offset="0.9062" stop-color="#d67900" stop-opacity="0.0689"/>
+   <stop offset="0.9300" stop-color="#d07800" stop-opacity="0.0000"/>
+  </radialGradient>
+ </defs>
+ <circle cx="8" cy="8" r="8" fill="url(#gl-g)"/>
+<defs>
+  <radialGradient id="su-body" cx="8" cy="8" r="6" gradientUnits="userSpaceOnUse">
+   <stop offset="0.0000" stop-color="#f9e300" stop-opacity="1.0000"/>
+   <stop offset="0.0833" stop-color="#f9d600" stop-opacity="0.9167"/>
+   <stop offset="0.1667" stop-color="#f9c900" stop-opacity="0.8333"/>
+   <stop offset="0.2500" stop-color="#f9bc00" stop-opacity="0.7500"/>
+   <stop offset="0.3333" stop-color="#f9b000" stop-opacity="0.6667"/>
+   <stop offset="0.4167" stop-color="#f9a300" stop-opacity="0.5833"/>
+   <stop offset="0.5000" stop-color="#f99600" stop-opacity="0.5000"/>
+   <stop offset="0.5833" stop-color="#f98900" stop-opacity="0.4167"/>
+   <stop offset="0.6667" stop-color="#f97c00" stop-opacity="0.3333"/>
+   <stop offset="0.7500" stop-color="#f97000" stop-opacity="0.2500"/>
+   <stop offset="0.8333" stop-color="#f96300" stop-opacity="0.1667"/>
+   <stop offset="0.9167" stop-color="#f95600" stop-opacity="0.0833"/>
+   <stop offset="1.0000" stop-color="#f94900" stop-opacity="0.0000"/>
+  </radialGradient>
+  <radialGradient id="su-hi" cx="8" cy="8" r="6" gradientTransform="matrix(1.3526 -.010836 -.026383 .76812 .48921 -6.6772)" gradientUnits="userSpaceOnUse">
+   <stop offset="0.0000" stop-color="#fff59f" stop-opacity="0.7304"/>
+   <stop offset="0.0833" stop-color="#feea92" stop-opacity="0.6696"/>
+   <stop offset="0.1667" stop-color="#fede84" stop-opacity="0.6087"/>
+   <stop offset="0.2500" stop-color="#fed377" stop-opacity="0.5478"/>
+   <stop offset="0.3333" stop-color="#fdc76a" stop-opacity="0.4870"/>
+   <stop offset="0.4167" stop-color="#fcbc5d" stop-opacity="0.4261"/>
+   <stop offset="0.5000" stop-color="#fcb050" stop-opacity="0.3652"/>
+   <stop offset="0.5833" stop-color="#fca542" stop-opacity="0.3043"/>
+   <stop offset="0.6667" stop-color="#fb9a35" stop-opacity="0.2435"/>
+   <stop offset="0.7500" stop-color="#fa8e28" stop-opacity="0.1826"/>
+   <stop offset="0.8333" stop-color="#fa831a" stop-opacity="0.1217"/>
+   <stop offset="0.9167" stop-color="#fa770d" stop-opacity="0.0609"/>
+   <stop offset="1.0000" stop-color="#f96c00" stop-opacity="0.0000"/>
+  </radialGradient>
+  <radialGradient id="su-edge" cx="8" cy="8" r="5.6569" gradientUnits="userSpaceOnUse">
+   <stop offset="0.7429" stop-color="#ffb049" stop-opacity="0.0000"/>
+   <stop offset="0.7858" stop-color="#ffa842" stop-opacity="0.1006"/>
+   <stop offset="0.8286" stop-color="#ffa03b" stop-opacity="0.2012"/>
+   <stop offset="0.8715" stop-color="#ff9834" stop-opacity="0.3017"/>
+   <stop offset="0.9143" stop-color="#ff902d" stop-opacity="0.4023"/>
+   <stop offset="0.9572" stop-color="#ff8826" stop-opacity="0.5029"/>
+   <stop offset="1.0000" stop-color="#ff801f" stop-opacity="0.6035"/>
+  </radialGradient>
+  <clipPath id="su-disc"><circle cx="8" cy="8" r="6"/></clipPath>
+ </defs>
+ <circle cx="8" cy="8" r="6" fill="url(#su-body)"/>
+ <g clip-path="url(#su-disc)">
+  <circle transform="matrix(.66953 .74278 -.91879 .39475 0 0)" cx="11.099" cy="-.61896" r="10.337" fill="url(#su-hi)"/>
+ </g>
+ <circle cx="8" cy="8" r="5.6569" fill="url(#su-edge)"/>
+<defs>
+  <radialGradient id="co-c" cx="8" cy="8" r="3.601" gradientUnits="userSpaceOnUse">
+   <stop offset="0" stop-color="#fff"/>
+   <stop offset=".24841" stop-color="#fff" stop-opacity=".18301"/>
+   <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+  </radialGradient>
+ </defs>
+ <circle cx="8" cy="8" r="3.601" fill="url(#co-c)"/>
+<defs>
+  <linearGradient id="ri-r" x1="4.5654" x2="12.463" y1="3.0803" y2="12.01" gradientUnits="userSpaceOnUse">
+   <stop offset="0" stop-color="#fff46d"/>
+   <stop offset=".5" stop-color="#e78423"/>
+   <stop offset="1" stop-color="#892f00"/>
+  </linearGradient>
+ </defs>
+ <path fill-rule="evenodd" fill="url(#ri-r)" d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2zm0 .5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z"/>
+  </g>
 </svg>

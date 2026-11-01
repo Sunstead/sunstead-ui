@@ -2,7 +2,7 @@
   "name": "@sunstead/ui",
   "private": true,
   "license": "MIT",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "type": "module",
   "description": "Shared Sunstead UI: themes, tokens and shadcn primitives on Base UI. Source-only; apps compile it.",
   "exports": {
@@ -15,6 +15,7 @@
     "./hooks/*": "./src/hooks/*.ts",
     "./brand/*": "./src/assets/brand/*.svg",
     "./product-icon": "./src/components/product-icon.tsx",
+    "./sunstead-mark": "./src/components/brand/sunstead.tsx",
     "./products": "./src/lib/products.ts"
   },
   "files": [

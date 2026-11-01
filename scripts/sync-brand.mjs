@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /**
- * Copies each product's own icon from its repo (sibling checkouts under
- * ~/Documents/Code) into src/assets/brand/, then rebuilds the components.
- * Products keep their own icon pipelines; this is only the refresh.
+ * src/assets/brand/ is where every Sunstead icon lives for everything that
+ * shows another product's icon (ProductIcon, the website). Solstice, Solstice
+ * Sync and Atlas draw theirs in their own repos, so this copies them in from
+ * sibling checkouts under ~/Documents/Code, then rebuilds the components. Helion's
+ * tile, Swindle Games' and the Sunstead mark are edited here directly.
  *
  *   npm run sync:brand
  */
@@ -15,7 +17,6 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const code = path.resolve(root, '..');
 
 const SOURCES = {
-  helion: 'Helion/app/src/assets/icon-mark.svg',
   solstice: 'Solstice/apps/desktop/src/assets/icons/app/icon_square.svg',
   'solstice-sync': 'Solstice/apps/sync/icon.svg',
   atlas: 'Atlas/app/public/icon.svg',
