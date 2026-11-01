@@ -18,7 +18,7 @@ const SOURCES = {
   helion: 'Helion/app/src/assets/icon-mark.svg',
   solstice: 'Solstice/apps/desktop/src/assets/icons/app/icon_square.svg',
   'solstice-sync': 'Solstice/apps/sync/icon.svg',
-  // Atlas has none of its own yet: src/assets/brand/atlas.svg is the source.
+  atlas: 'Atlas/app/public/icon.svg',
 };
 
 for (const [id, rel] of Object.entries(SOURCES)) {
