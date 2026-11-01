@@ -2,7 +2,7 @@
   "name": "@sunstead/ui",
   "private": true,
   "license": "MIT",
-  "version": "0.3.8",
+  "version": "0.3.10",
   "type": "module",
   "description": "Shared Sunstead UI: themes, tokens and shadcn primitives on Base UI. Source-only; apps compile it.",
   "exports": {
@@ -12,7 +12,10 @@
     "./use-theme": "./src/hooks/use-theme.ts",
     "./utils": "./src/lib/utils.ts",
     "./components/*": "./src/components/ui/*.tsx",
-    "./hooks/*": "./src/hooks/*.ts"
+    "./hooks/*": "./src/hooks/*.ts",
+    "./brand/*": "./src/assets/brand/*.svg",
+    "./product-icon": "./src/components/product-icon.tsx",
+    "./products": "./src/lib/products.ts"
   },
   "files": [
     "src",
@@ -21,6 +24,8 @@
   "scripts": {
     "lint": "eslint .",
     "typecheck": "tsc",
+    "build:brand": "node scripts/build-brand.mjs",
+    "sync:brand": "node scripts/sync-brand.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -44,6 +49,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
     "@types/node": "^26.0.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
