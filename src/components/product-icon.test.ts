@@ -14,23 +14,17 @@ describe('product icons', () => {
     }
   });
 
-  it('lists no icon that is not a product', () => {
-    const ids = new Set<string>(PRODUCTS.map((p) => p.id));
+  it('lists no icon that is not a product or the Sunstead mark', () => {
+    const ids = new Set<string>([...PRODUCTS.map((p) => p.id), 'sunstead']);
     for (const file of readdirSync(brand)) expect(ids.has(file.replace(/\.svg$/, '')), file).toBe(true);
   });
 
   it('keeps each SVG self-contained: a viewBox, no <style>', () => {
-    for (const { id } of PRODUCTS) {
+    for (const id of [...PRODUCTS.map((p) => p.id), 'sunstead']) {
       const svg = readFileSync(path.join(brand, `${id}.svg`), 'utf8');
       expect(svg, id).toMatch(/viewBox="/);
       expect(svg, `${id} has a <style>, which would restyle the page it is inlined in`).not.toMatch(/<style/);
     }
-  });
-
-  it('keeps Helion themed: two stops reading the mark colours', () => {
-    const svg = readFileSync(path.join(brand, 'helion.svg'), 'utf8');
-    expect(svg).toContain('var(--mark-0');
-    expect(svg).toContain('var(--mark-1');
   });
 
   it('keeps ids apart between products', () => {

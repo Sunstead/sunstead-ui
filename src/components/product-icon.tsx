@@ -3,6 +3,7 @@ import { AtlasMark } from './brand/atlas';
 import { HelionMark } from './brand/helion';
 import { SolsticeMark } from './brand/solstice';
 import { SolsticeSyncMark } from './brand/solstice-sync';
+import { SwindleGamesMark } from './brand/swindle-games';
 import type { Product } from '../lib/products';
 
 const MARKS: Record<Product, ComponentType<SVGProps<SVGSVGElement>>> = {
@@ -10,6 +11,7 @@ const MARKS: Record<Product, ComponentType<SVGProps<SVGSVGElement>>> = {
   'solstice-sync': SolsticeSyncMark,
   atlas: AtlasMark,
   helion: HelionMark,
+  'swindle-games': SwindleGamesMark,
 };
 
 interface ProductIconProps extends SVGProps<SVGSVGElement> {
@@ -18,8 +20,8 @@ interface ProductIconProps extends SVGProps<SVGSVGElement> {
 }
 
 /**
- * A Sunstead product's icon. Helion's follows the theme (`--mark-0`,
- * `--mark-1`); the others are tiles with their own ground.
+ * A Sunstead product's icon: its app icon, a tile with its own ground
+ * (Swindle Games' is a glyph on none).
  */
 export function ProductIcon({ product, size = 24, ...props }: ProductIconProps) {
   const Mark = MARKS[product];
