@@ -20,8 +20,7 @@ interface ProductIconProps extends SVGProps<SVGSVGElement> {
 }
 
 /**
- * A Sunstead product's icon: its app icon, a tile with its own ground
- * (Swindle Games' is a glyph on none).
+ * A Sunstead product's icon: its app icon, a tile with its own ground.
  */
 export function ProductIcon({ product, size = 24, ...props }: ProductIconProps) {
   const Mark = MARKS[product];
