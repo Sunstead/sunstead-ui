@@ -1,92 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
-  <!-- Built from Helion app/src/assets/app.icon (as of Helion 2a372ec): its gradient fill (Display P3 converted to
-       sRGB) and the glow, sun, core and ring layers, stacked as Icon Composer orders them. -->
+  <!-- Built from Helion app/src/assets/app.icon, light appearance: its gradient fill and the halo, gear and core
+       layers, stacked as Icon Composer orders them (the gear is twelve exact 30 degree teeth). -->
   <defs>
     <linearGradient id="hel-fill" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#9b3800"/>
-      <stop offset="1" stop-color="#592300"/>
+      <stop offset="0" stop-color="#ed8200"/>
+      <stop offset="1" stop-color="#903f0b"/>
     </linearGradient>
   </defs>
   <rect width="1024" height="1024" rx="229" fill="url(#hel-fill)"/>
   <g transform="scale(64)">
 <defs>
-  <radialGradient id="gl-g" cx="8" cy="8" r="8" gradientUnits="userSpaceOnUse">
-   <stop offset="0" stop-color="#ff8303" stop-opacity="0"/>
-   <stop offset=".66" stop-color="#ff8303" stop-opacity="0"/>
-   <stop offset="0.7400" stop-color="#ff8303" stop-opacity="0.5512"/>
-   <stop offset="0.7638" stop-color="#f98203" stop-opacity="0.4823"/>
-   <stop offset="0.7875" stop-color="#f38002" stop-opacity="0.4134"/>
-   <stop offset="0.8113" stop-color="#ed7f02" stop-opacity="0.3445"/>
-   <stop offset="0.8350" stop-color="#e87e02" stop-opacity="0.2756"/>
-   <stop offset="0.8588" stop-color="#e27c01" stop-opacity="0.2067"/>
-   <stop offset="0.8825" stop-color="#dc7b01" stop-opacity="0.1378"/>
-   <stop offset="0.9062" stop-color="#d67900" stop-opacity="0.0689"/>
-   <stop offset="0.9300" stop-color="#d07800" stop-opacity="0.0000"/>
+  <radialGradient id="ha-h" cx="8" cy="8" r="6.64" gradientUnits="userSpaceOnUse">
+   <stop offset="0" stop-color="#fffdf0"/>
+   <stop offset=".3" stop-color="#fff2b0" stop-opacity=".6"/>
+   <stop offset="1" stop-color="#ffd060" stop-opacity="0"/>
   </radialGradient>
  </defs>
- <circle cx="8" cy="8" r="8" fill="url(#gl-g)"/>
+ <circle cx="8" cy="8" r="6.64" fill="url(#ha-h)"/>
 <defs>
-  <radialGradient id="su-body" cx="8" cy="8" r="6" gradientUnits="userSpaceOnUse">
-   <stop offset="0.0000" stop-color="#f9e300" stop-opacity="1.0000"/>
-   <stop offset="0.0833" stop-color="#f9d600" stop-opacity="0.9167"/>
-   <stop offset="0.1667" stop-color="#f9c900" stop-opacity="0.8333"/>
-   <stop offset="0.2500" stop-color="#f9bc00" stop-opacity="0.7500"/>
-   <stop offset="0.3333" stop-color="#f9b000" stop-opacity="0.6667"/>
-   <stop offset="0.4167" stop-color="#f9a300" stop-opacity="0.5833"/>
-   <stop offset="0.5000" stop-color="#f99600" stop-opacity="0.5000"/>
-   <stop offset="0.5833" stop-color="#f98900" stop-opacity="0.4167"/>
-   <stop offset="0.6667" stop-color="#f97c00" stop-opacity="0.3333"/>
-   <stop offset="0.7500" stop-color="#f97000" stop-opacity="0.2500"/>
-   <stop offset="0.8333" stop-color="#f96300" stop-opacity="0.1667"/>
-   <stop offset="0.9167" stop-color="#f95600" stop-opacity="0.0833"/>
-   <stop offset="1.0000" stop-color="#f94900" stop-opacity="0.0000"/>
-  </radialGradient>
-  <radialGradient id="su-hi" cx="8" cy="8" r="6" gradientTransform="matrix(1.3526 -.010836 -.026383 .76812 .48921 -6.6772)" gradientUnits="userSpaceOnUse">
-   <stop offset="0.0000" stop-color="#fff59f" stop-opacity="0.7304"/>
-   <stop offset="0.0833" stop-color="#feea92" stop-opacity="0.6696"/>
-   <stop offset="0.1667" stop-color="#fede84" stop-opacity="0.6087"/>
-   <stop offset="0.2500" stop-color="#fed377" stop-opacity="0.5478"/>
-   <stop offset="0.3333" stop-color="#fdc76a" stop-opacity="0.4870"/>
-   <stop offset="0.4167" stop-color="#fcbc5d" stop-opacity="0.4261"/>
-   <stop offset="0.5000" stop-color="#fcb050" stop-opacity="0.3652"/>
-   <stop offset="0.5833" stop-color="#fca542" stop-opacity="0.3043"/>
-   <stop offset="0.6667" stop-color="#fb9a35" stop-opacity="0.2435"/>
-   <stop offset="0.7500" stop-color="#fa8e28" stop-opacity="0.1826"/>
-   <stop offset="0.8333" stop-color="#fa831a" stop-opacity="0.1217"/>
-   <stop offset="0.9167" stop-color="#fa770d" stop-opacity="0.0609"/>
-   <stop offset="1.0000" stop-color="#f96c00" stop-opacity="0.0000"/>
-  </radialGradient>
-  <radialGradient id="su-edge" cx="8" cy="8" r="5.6569" gradientUnits="userSpaceOnUse">
-   <stop offset="0.7429" stop-color="#ffb049" stop-opacity="0.0000"/>
-   <stop offset="0.7858" stop-color="#ffa842" stop-opacity="0.1006"/>
-   <stop offset="0.8286" stop-color="#ffa03b" stop-opacity="0.2012"/>
-   <stop offset="0.8715" stop-color="#ff9834" stop-opacity="0.3017"/>
-   <stop offset="0.9143" stop-color="#ff902d" stop-opacity="0.4023"/>
-   <stop offset="0.9572" stop-color="#ff8826" stop-opacity="0.5029"/>
-   <stop offset="1.0000" stop-color="#ff801f" stop-opacity="0.6035"/>
-  </radialGradient>
-  <clipPath id="su-disc"><circle cx="8" cy="8" r="6"/></clipPath>
- </defs>
- <circle cx="8" cy="8" r="6" fill="url(#su-body)"/>
- <g clip-path="url(#su-disc)">
-  <circle transform="matrix(.66953 .74278 -.91879 .39475 0 0)" cx="11.099" cy="-.61896" r="10.337" fill="url(#su-hi)"/>
- </g>
- <circle cx="8" cy="8" r="5.6569" fill="url(#su-edge)"/>
-<defs>
-  <radialGradient id="co-c" cx="8" cy="8" r="3.601" gradientUnits="userSpaceOnUse">
-   <stop offset="0" stop-color="#fff"/>
-   <stop offset=".24841" stop-color="#fff" stop-opacity=".18301"/>
-   <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+  <radialGradient id="ge-g" cx="8" cy="8" r="6.64" gradientUnits="userSpaceOnUse">
+   <stop offset=".3" stop-color="#fff"/>
+   <stop offset=".7" stop-color="#fdeab0"/>
+   <stop offset="1" stop-color="#f3be5e"/>
   </radialGradient>
  </defs>
- <circle cx="8" cy="8" r="3.601" fill="url(#co-c)"/>
-<defs>
-  <linearGradient id="ri-r" x1="4.5654" x2="12.463" y1="3.0803" y2="12.01" gradientUnits="userSpaceOnUse">
-   <stop offset="0" stop-color="#fff46d"/>
-   <stop offset=".5" stop-color="#e78423"/>
-   <stop offset="1" stop-color="#892f00"/>
-  </linearGradient>
- </defs>
- <path fill-rule="evenodd" fill="url(#ri-r)" d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2zm0 .5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z"/>
+ <path fill="url(#ge-g)" fill-rule="evenodd" d="M7.3836 3.6686L7.7567 1.3645L8.2433 1.3645L8.6164 3.6686A4.3750 4.3750 0 0 1 9.6318 3.9407L9.6318 3.9407L11.1071 2.1318L11.5285 2.3751L10.6995 4.5572A4.3750 4.3750 0 0 1 11.4428 5.3005L11.4428 5.3005L13.6249 4.4715L13.8682 4.8929L12.0593 6.3682A4.3750 4.3750 0 0 1 12.3314 7.3836L12.3314 7.3836L14.6355 7.7567L14.6355 8.2433L12.3314 8.6164A4.3750 4.3750 0 0 1 12.0593 9.6318L12.0593 9.6318L13.8682 11.1071L13.6249 11.5285L11.4428 10.6995A4.3750 4.3750 0 0 1 10.6995 11.4428L10.6995 11.4428L11.5285 13.6249L11.1071 13.8682L9.6318 12.0593A4.3750 4.3750 0 0 1 8.6164 12.3314L8.6164 12.3314L8.2433 14.6355L7.7567 14.6355L7.3836 12.3314A4.3750 4.3750 0 0 1 6.3682 12.0593L6.3682 12.0593L4.8929 13.8682L4.4715 13.6249L5.3005 11.4428A4.3750 4.3750 0 0 1 4.5572 10.6995L4.5572 10.6995L2.3751 11.5285L2.1318 11.1071L3.9407 9.6318A4.3750 4.3750 0 0 1 3.6686 8.6164L3.6686 8.6164L1.3645 8.2433L1.3645 7.7567L3.6686 7.3836A4.3750 4.3750 0 0 1 3.9407 6.3682L3.9407 6.3682L2.1318 4.8929L2.3751 4.4715L4.5572 5.3005A4.3750 4.3750 0 0 1 5.3005 4.5572L5.3005 4.5572L4.4715 2.3751L4.8929 2.1318L6.3682 3.9407A4.3750 4.3750 0 0 1 7.3836 3.6686ZM5.3600 8.0000A2.6400 2.6400 0 1 0 10.6400 8.0000A2.6400 2.6400 0 1 0 5.3600 8.0000Z"/>
+ <circle cx="8" cy="8" r="1.81" fill="#fff"/>
   </g>
 </svg>
