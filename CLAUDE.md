@@ -64,7 +64,7 @@ npx shadcn@latest add <component> --overwrite
 ## Product icons
 
 `src/assets/brand/` is the one home of every Sunstead icon: each product's app
-icon (`<product>.svg`, a tile with its own ground; Swindle Games' is a glyph)
+icon (`<product>.svg`, a tile with its own ground)
 and the Sunstead mark (`sunstead.svg`). Change an icon here and everything that
 shows it follows: `ProductIcon` (`@sunstead/ui/product-icon`), `SunsteadMark`
 (`@sunstead/ui/sunstead-mark`), the raw files (`@sunstead/ui/brand/<id>`) and
