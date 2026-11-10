@@ -45,6 +45,10 @@ npx shadcn@latest add <component> --overwrite
   - `use-mobile` uses `useSyncExternalStore`.
   - `.glass` stays as a utility for app chrome (Cosmos uses it); the
     primitives no longer use it.
+  - `calendar` is shadcn's (react-day-picker). `date-picker` and
+    `time-picker` are Sunstead's own, built on it and `popover`: values are
+    `YYYY-MM-DD` and `HH:MM` strings, and the time picker reads typed times
+    (`4pm`, `930`).
 - **Themes:** one `[data-theme='<id>']` block in `src/themes/<file>.css`,
   imported from `styles.css`, plus an entry in `src/lib/themes.ts`. Every
   theme defines exactly the same tokens as `sunstead-dark`
