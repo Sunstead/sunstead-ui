@@ -18,6 +18,7 @@
 
 /* Themes: one [data-theme] block each, listed in lib/themes.ts. */
 @import './themes/sunstead.css';
+@import './themes/atlas.css';
 @import './themes/nebula.css';
 @import './themes/aurora.css';
 @import './themes/mars.css';

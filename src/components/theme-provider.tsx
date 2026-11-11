@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ThemeContext } from '../hooks/use-theme';
 import {
   applyTheme,
+  DEFAULTS,
   normalizeChoice,
   normalizeSlot,
   resolveTheme,
@@ -10,6 +11,7 @@ import {
   storageKeys,
   SYSTEM,
   type ThemeChoice,
+  type ThemeDefaults,
   type ThemePair,
 } from '../lib/themes';
 
@@ -38,25 +40,29 @@ function write(key: string, value: string) {
  * `app` prefixes the localStorage keys (`<app>-theme`), so each app on the
  * same origin keeps its own choice. It must match the app's index.html.
  * `aliases` maps ids the app stored before (see `ThemeAliases`); index.html
- * needs the same mapping for the first paint.
+ * needs the same mapping for the first paint. `defaults` is the theme a new
+ * visitor gets and Follow system's pair (Sunstead's unless the app has its
+ * own); index.html's fallback must match it.
  */
 export function ThemeProvider({
   app,
   aliases,
+  defaults = DEFAULTS,
   children,
 }: {
   app: string;
   aliases?: ThemeAliases;
+  defaults?: ThemeDefaults;
   children: React.ReactNode;
 }) {
   const keys = useMemo(() => storageKeys(app), [app]);
-  const [choice, setChoice] = useState<ThemeChoice>(() => normalizeChoice(read(keys.theme), aliases));
+  const [choice, setChoice] = useState<ThemeChoice>(() => normalizeChoice(read(keys.theme), aliases, defaults));
   const [pair, setPairState] = useState<ThemePair>(() => ({
-    light: normalizeSlot('light', read(keys.light), aliases),
-    dark: normalizeSlot('dark', read(keys.dark), aliases),
+    light: normalizeSlot('light', read(keys.light), aliases, defaults),
+    dark: normalizeSlot('dark', read(keys.dark), aliases, defaults),
   }));
   const [system, setSystem] = useState<Scheme>(systemScheme);
-  const resolved = resolveTheme(choice, pair, system);
+  const resolved = resolveTheme(choice, pair, system, defaults);
 
   useEffect(() => {
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
@@ -69,11 +75,11 @@ export function ThemeProvider({
 
   const setThemeId = useCallback(
     (id: string) => {
-      const next = normalizeChoice(id);
+      const next = normalizeChoice(id, {}, defaults);
       write(keys.theme, next);
       setChoice(next);
     },
-    [keys],
+    [keys, defaults],
   );
 
   const setFollowSystem = useCallback(
@@ -88,11 +94,11 @@ export function ThemeProvider({
 
   const setPair = useCallback(
     (scheme: Scheme, id: string) => {
-      const slot = normalizeSlot(scheme, id);
+      const slot = normalizeSlot(scheme, id, {}, defaults);
       write(keys[scheme], slot);
       setPairState((p) => (p[scheme] === slot ? p : { ...p, [scheme]: slot }));
     },
-    [keys],
+    [keys, defaults],
   );
 
   const followSystem = choice === SYSTEM;

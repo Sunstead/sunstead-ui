@@ -7,13 +7,13 @@ colour neutral). The look is Solstice's: its components came in as they were.
 
 ## Themes
 
-22 themes, grouped by scheme only. A tech theme (Hologram, Terminal, Red
+24 themes, grouped by scheme only. A tech theme (Hologram, Terminal, Red
 Alert, Blueprint) is square, mono and bracketed, but sits under Dark or Light
 with the rest, and Follow system can pair it.
 
-- **Dark:** Sunstead Dark, Nebula, Aurora, Mars, Event Horizon, Eclipse,
+- **Dark:** Atlas Dark, Sunstead Dark, Nebula, Aurora, Mars, Event Horizon, Eclipse,
   Deep Field, Stone, Ember, Concrete, Inferno, Hologram, Terminal, Red Alert.
-- **Light:** Sunstead Light, Solar, Lunar, Comet, Orchard, Brutalist,
+- **Light:** Atlas Light, Sunstead Light, Solar, Lunar, Comet, Orchard, Brutalist,
   Bubblegum, Blueprint.
 
 ## Using it
@@ -47,6 +47,9 @@ import { Button } from '@sunstead/ui/components/button';
 - **Each app's `index.html`** paints the stored theme before any script
   runs, from its own copy of the theme ids (`storageKeys(app)` names the
   localStorage keys). Each app tests that copy against `THEMES`.
+- **An app's own default:** pass `defaults` to `ThemeProvider`
+  (`{ theme, pair }`) and use the same ids in `index.html`'s fallback. Atlas
+  defaults to Atlas Dark, paired with Atlas Light; others get Sunstead's.
 - **Renamed ids:** pass `aliases` to `ThemeProvider` (and mirror them in
   `index.html`) so old stored values keep working, e.g. Cosmos's
   `cosmos-dark` → `sunstead-dark`.

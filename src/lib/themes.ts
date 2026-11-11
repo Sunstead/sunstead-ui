@@ -34,6 +34,7 @@ export interface ThemeDef {
 
 export const THEMES: readonly ThemeDef[] = [
   // Dark
+  { id: 'atlas-dark', name: 'Atlas Dark', scheme: 'dark', style: 'rounded', description: 'Warm black, signal orange' },
   { id: 'sunstead-dark', name: 'Sunstead Dark', scheme: 'dark', style: 'rounded', description: 'Near-black space, crisp white' },
   { id: 'nebula', name: 'Nebula', scheme: 'dark', style: 'rounded', description: 'Deep violet with a magenta glow' },
   { id: 'aurora', name: 'Aurora', scheme: 'dark', style: 'rounded', description: 'Polar night, mint and violet' },
@@ -49,6 +50,7 @@ export const THEMES: readonly ThemeDef[] = [
   { id: 'terminal', name: 'Terminal', scheme: 'dark', style: 'tech', description: 'Phosphor green on black' },
   { id: 'red-alert', name: 'Red Alert', scheme: 'dark', style: 'tech', description: 'Bridge black, crimson alarm' },
   // Light
+  { id: 'atlas-light', name: 'Atlas Light', scheme: 'light', style: 'rounded', description: 'Warm white, signal orange' },
   { id: 'sunstead-light', name: 'Sunstead Light', scheme: 'light', style: 'rounded', description: 'Clean white, ink black' },
   { id: 'solar', name: 'Solar', scheme: 'light', style: 'rounded', description: 'Warm cream and amber' },
   { id: 'lunar', name: 'Lunar', scheme: 'light', style: 'rounded', description: 'Cool grey with slate blue' },
@@ -99,23 +101,43 @@ export function themesOf(scheme: Scheme): ThemeDef[] {
  */
 export type ThemeAliases = Readonly<Record<string, string>>;
 
+/**
+ * What an app falls back to: its default theme, and Follow system's pair.
+ * Most apps use the Sunstead pair; Atlas passes its own.
+ */
+export interface ThemeDefaults {
+  theme: string;
+  pair: ThemePair;
+}
+
+export const DEFAULTS: ThemeDefaults = { theme: DEFAULT_THEME, pair: DEFAULT_PAIR };
+
 /** A stored choice, made valid: `system` stays, aliases map, anything unknown is the default. */
-export function normalizeChoice(value: string | null | undefined, aliases: ThemeAliases = {}): ThemeChoice {
+export function normalizeChoice(
+  value: string | null | undefined,
+  aliases: ThemeAliases = {},
+  defaults: ThemeDefaults = DEFAULTS,
+): ThemeChoice {
   if (value === SYSTEM) return SYSTEM;
   const id = (value && Object.prototype.hasOwnProperty.call(aliases, value) ? aliases[value] : value) ?? null;
-  return themeById(id) ? id! : DEFAULT_THEME;
+  return themeById(id) ? id! : defaults.theme;
 }
 
 /** A stored pair slot, made valid: it must name a theme of that scheme. */
-export function normalizeSlot(scheme: Scheme, value: string | null | undefined, aliases: ThemeAliases = {}): string {
+export function normalizeSlot(
+  scheme: Scheme,
+  value: string | null | undefined,
+  aliases: ThemeAliases = {},
+  defaults: ThemeDefaults = DEFAULTS,
+): string {
   const id = value && Object.prototype.hasOwnProperty.call(aliases, value) ? aliases[value] : value;
   const theme = themeById(id);
-  return theme?.scheme === scheme ? id! : DEFAULT_PAIR[scheme];
+  return theme?.scheme === scheme ? id! : defaults.pair[scheme];
 }
 
-export function resolveTheme(choice: ThemeChoice, pair: ThemePair, systemScheme: Scheme): ThemeDef {
+export function resolveTheme(choice: ThemeChoice, pair: ThemePair, systemScheme: Scheme, defaults: ThemeDefaults = DEFAULTS): ThemeDef {
   const id = choice === SYSTEM ? pair[systemScheme] : choice;
-  return themeById(id) ?? themeById(choice === SYSTEM ? DEFAULT_PAIR[systemScheme] : DEFAULT_THEME)!;
+  return themeById(id) ?? themeById(choice === SYSTEM ? defaults.pair[systemScheme] : defaults.theme)!;
 }
 
 /** Puts a theme on <html>: its id, its style, its scheme's class and `color-scheme`. */
