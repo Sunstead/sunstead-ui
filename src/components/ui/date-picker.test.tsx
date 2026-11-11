@@ -13,7 +13,7 @@ describe("date picker", () => {
   })
 
   it("shows the date on its button, or the placeholder", () => {
-    expect(renderToStaticMarkup(<DatePicker value="2026-11-10" onChange={() => {}} />)).toContain("Tue 10 Nov 2026")
+    expect(renderToStaticMarkup(<DatePicker value="2026-11-10" onChange={() => {}} />)).toContain("Tue, Nov 10, 2026")
     expect(renderToStaticMarkup(<DatePicker value={null} onChange={() => {}} placeholder="Pick a day" />)).toContain("Pick a day")
   })
 })

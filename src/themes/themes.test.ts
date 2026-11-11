@@ -7,6 +7,7 @@ import {
   DEFAULT_THEME,
   normalizeChoice,
   normalizeSlot,
+  resolveTheme,
   SYSTEM,
   THEMES,
   themeById,
@@ -77,7 +78,19 @@ const PAIRS: [text: string, surface: string[]][] = [
 ];
 
 /** Tokens a theme may leave to the base: only the shape. */
-const OPTIONAL = new Set(['--radius']);
+const BUTTON = ['--button-fill', '--button-fill-hover', '--button-foreground', '--button-edge-top', '--button-edge-bottom', '--button-border'];
+const OPTIONAL = new Set(['--radius', ...BUTTON]);
+
+/** The colour stops of a `linear-gradient(...)`, or the value itself. */
+function stops(value: string): string[] {
+  const m = /^linear-gradient\((.*)\)$/.exec(value.trim());
+  if (!m) return [value];
+  return m[1]
+    .split(/,(?![^(]*\))/)
+    .map((s) => s.trim())
+    .filter((s) => !s.startsWith('to '))
+    .map((s) => s.replace(/\s+\d+(\.\d+)?%$/, ''));
+}
 
 /** Kept exactly as Cosmos's originals were before themes; see the per-theme checks. */
 const ORIGINALS = new Set(['sunstead-dark', 'sunstead-light']);
@@ -130,6 +143,17 @@ describe('themes', () => {
     expect(normalizeChoice('dark')).toBe(DEFAULT_THEME);
   });
 
+  it('takes an app\'s own defaults', () => {
+    const atlas = { theme: 'atlas-dark', pair: { dark: 'atlas-dark', light: 'atlas-light' } };
+    expect(normalizeChoice(null, {}, atlas)).toBe('atlas-dark');
+    expect(normalizeChoice('nope', {}, atlas)).toBe('atlas-dark');
+    expect(normalizeChoice('nebula', {}, atlas)).toBe('nebula');
+    expect(normalizeSlot('light', 'nope', {}, atlas)).toBe('atlas-light');
+    expect(normalizeSlot('dark', null, {}, atlas)).toBe('atlas-dark');
+    expect(resolveTheme('nope', atlas.pair, 'dark', atlas).id).toBe('atlas-dark');
+    expect(resolveTheme(SYSTEM, { dark: 'nope', light: 'nope' }, 'light', atlas).id).toBe('atlas-light');
+  });
+
   it('Sunstead Dark carries the core and hologram tokens', () => {
     for (const token of [...CORE, ...HOLO]) expect(reference.has(token), token).toBe(true);
   });
@@ -151,6 +175,22 @@ describe('themes', () => {
       expect(base.a).toBe(1);
       expect(border.a).toBeCloseTo(parseFloat(opacity) / 100, 3);
       expect(distance({ ...border, a: 1 }, base)).toBeLessThan(0.001);
+    });
+
+    // The bevelled button is all or nothing, and its text reads where it
+    // sits: the middle of the gradient (an even blend of its first and last stops).
+    it('defines the bevelled button whole, or not at all', () => {
+      const present = BUTTON.filter((t) => tokens.has(t));
+      expect(present.length === 0 || present.length === BUTTON.length, present.join(', ')).toBe(true);
+      if (!present.length) return;
+      const text = colour('--button-foreground');
+      for (const fill of ['--button-fill', '--button-fill-hover']) {
+        const all = stops(tokens.get(fill)!).map(parseColor);
+        for (const c of all) expect(c.a, fill).toBe(1);
+        const middle = over({ ...all[all.length - 1], a: 0.5 }, all[0]);
+        const ratio = contrast(text, middle);
+        expect(ratio, `${theme.id} ${fill}: ${ratio.toFixed(2)}`).toBeGreaterThanOrEqual(4.5);
+      }
     });
 
     it('has an opaque popover, which menus make translucent themselves', () => {

@@ -56,7 +56,10 @@ npx shadcn@latest add <component> --overwrite
   metric colours apart, with no exemptions. `--radius` is optional (the base is
   0.5rem). The border is given twice, as `--border` and as
   `--border-color` plus `--border-opacity`, and the test checks they agree.
-  `--popover` is opaque. Tech themes (`style: 'tech'`) are square and mono,
+  `--popover` is opaque. The `--button-*` tokens are optional and all or
+  nothing: they bevel the primary button (a gradient fill, light and dark
+  edges, its own text colour, checked at 4.5:1 mid-gradient), and live in
+  `buttonVariants` so links styled as buttons get them too. Tech themes (`style: 'tech'`) are square and mono,
   but are grouped by scheme like the rest; there is no Tech group.
 - **Tech brackets** in `styles.css` select by `data-slot`; a new floating
   primitive gets its slot added there.

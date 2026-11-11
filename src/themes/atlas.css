@@ -1,0 +1,220 @@
+/* Atlas Dark and Atlas Light: Atlas's own pair, around the orange of its
+   icon (#ff4b0c). The ground is a plain neutral grey, so the orange is the
+   only colour in the chrome. The primary button is bevelled (the --button-*
+   tokens, see styles.css): a deeper orange gradient that carries white text,
+   and --primary is the same deep orange with white text wherever it is a
+   fill; --ring is a brighter orange so focus stays visible. The canvas colours
+   are saturated on purpose: Atlas uses them as the hue of each area. */
+
+[data-theme='atlas-dark'] {
+  --background: oklch(0.16 0 0);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.19 0 0);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.565 0.19 38);
+  --primary-foreground: #ffffff;
+  --secondary: oklch(0.25 0 0);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.235 0 0);
+  --muted-foreground: oklch(0.71 0 0);
+  --accent: oklch(0.26 0 0);
+  --accent-foreground: oklch(0.97 0 0);
+  --destructive: oklch(0.68 0.2 24);
+  --border: oklch(1 0 0 / 0.09);
+  --border-color: oklch(1 0 0);
+  --border-opacity: 9%;
+  --input: oklch(1 0 0 / 0.14);
+  --ring: oklch(0.68 0.18 40);
+  --chart-1: oklch(0.7 0.195 40);
+  --chart-2: oklch(0.72 0.13 235);
+  --chart-3: oklch(0.76 0.16 150);
+  --chart-4: oklch(0.72 0.16 300);
+  --chart-5: oklch(0.83 0.15 90);
+  --sidebar: oklch(0.235 0 0);
+  --sidebar-foreground: oklch(0.86 0 0);
+  --sidebar-primary: oklch(0.565 0.19 38);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: oklch(0.345 0 0);
+  --sidebar-accent-foreground: oklch(0.97 0 0);
+  --sidebar-border: oklch(1 0 0 / 0.09);
+  --sidebar-ring: oklch(0.68 0.18 40);
+
+  --success: oklch(0.77 0.17 150);
+  --warning: oklch(0.83 0.15 85);
+  --error: oklch(0.69 0.2 25);
+
+  --cpu: oklch(0.7 0.15 260);
+  --ram: oklch(0.74 0.16 315);
+  --network: oklch(0.82 0.11 185);
+  --disk: oklch(0.76 0.15 55);
+
+  --mark-0: #ffffff;
+  --mark-1: #ff4b0c;
+
+  --ansi-0: #525252;
+  --ansi-1: #f87171;
+  --ansi-2: #4ade80;
+  --ansi-3: #facc15;
+  --ansi-4: #60a5fa;
+  --ansi-5: #e879f9;
+  --ansi-6: #22d3ee;
+  --ansi-7: #d4d4d4;
+  --ansi-8: #a3a3a3;
+  --ansi-9: #fca5a5;
+  --ansi-10: #86efac;
+  --ansi-11: #fde047;
+  --ansi-12: #93c5fd;
+  --ansi-13: #f0abfc;
+  --ansi-14: #67e8f9;
+  --ansi-15: #fafafa;
+
+  --glass-blur: 16px;
+  --glass-tint: oklch(1 0 0 / 0.02);
+
+  --space: #030303;
+  --star: oklch(0.92 0 0);
+  --orbit: oklch(0.85 0 0 / 0.1);
+  --planet-light: 72%;
+  --planet-mid: 50%;
+  --planet-shade: 12%;
+  --planet-atmosphere: 0.5;
+
+  --holo-space: #020202;
+  --holo-primary: oklch(0.8 0.15 45);
+  --holo-secondary: oklch(0.76 0 0);
+  --holo-text: oklch(0.97 0 0);
+  --holo-dim: oklch(0.56 0 0);
+  --holo-glow: 0.55;
+
+  /* Code syntax, and JSON Canvas colours 1-6 (red, orange, yellow, green, cyan, purple). */
+  --syntax-keyword: oklch(0.76 0.16 300);
+  --syntax-string: oklch(0.78 0.15 150);
+  --syntax-number: oklch(0.82 0.14 90);
+  --syntax-function: oklch(0.75 0.13 235);
+  --syntax-type: oklch(0.8 0.11 195);
+  --syntax-property: oklch(0.78 0.13 50);
+  --syntax-constant: oklch(0.75 0.17 40);
+  --syntax-tag: oklch(0.74 0.18 350);
+  --canvas-color-1: oklch(0.69 0.2 25);
+  --canvas-color-2: oklch(0.75 0.17 55);
+  --canvas-color-3: oklch(0.84 0.15 92);
+  --canvas-color-4: oklch(0.76 0.17 150);
+  --canvas-color-5: oklch(0.74 0.13 230);
+  --canvas-color-6: oklch(0.72 0.17 300);
+
+  /* The bevelled primary button. */
+  --button-fill: linear-gradient(to bottom, #d24c11, #b03b0b);
+  --button-fill-hover: linear-gradient(to bottom, #f06a28, #a3330a);
+  --button-foreground: #ffffff;
+  --button-edge-top: oklch(1 0 0 / 0.2);
+  --button-edge-bottom: oklch(0 0 0 / 0.22);
+  --button-border: #7a2805;
+}
+
+[data-theme='atlas-light'] {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.18 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0 0);
+  --popover: #ffffff;
+  --popover-foreground: oklch(0.18 0 0);
+  --primary: oklch(0.55 0.19 38);
+  --primary-foreground: #ffffff;
+  --secondary: oklch(0.965 0 0);
+  --secondary-foreground: oklch(0.2 0 0);
+  --muted: oklch(0.965 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.955 0 0);
+  --accent-foreground: oklch(0.2 0 0);
+  --destructive: oklch(0.56 0.21 25);
+  --border: oklch(0.915 0 0);
+  --border-color: oklch(0.915 0 0);
+  --border-opacity: 100%;
+  --input: oklch(0.89 0 0);
+  --ring: oklch(0.66 0.19 40);
+  --chart-1: oklch(0.62 0.19 40);
+  --chart-2: oklch(0.55 0.15 245);
+  --chart-3: oklch(0.6 0.16 150);
+  --chart-4: oklch(0.55 0.2 300);
+  --chart-5: oklch(0.72 0.15 85);
+  --sidebar: oklch(0.925 0 0);
+  --sidebar-foreground: oklch(0.18 0 0);
+  --sidebar-primary: oklch(0.55 0.19 38);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: oklch(0.86 0 0);
+  --sidebar-accent-foreground: oklch(0.18 0 0);
+  --sidebar-border: oklch(0.915 0 0);
+  --sidebar-ring: oklch(0.66 0.19 40);
+
+  --success: oklch(0.5 0.14 150);
+  --warning: oklch(0.52 0.12 75);
+  --error: oklch(0.52 0.2 25);
+
+  --cpu: oklch(0.48 0.17 265);
+  --ram: oklch(0.5 0.2 320);
+  --network: oklch(0.56 0.1 190);
+  --disk: oklch(0.62 0.16 55);
+
+  --mark-0: #3c3c3c;
+  --mark-1: #ff4b0c;
+
+  --ansi-0: #404040;
+  --ansi-1: #b91c1c;
+  --ansi-2: #15803d;
+  --ansi-3: #a16207;
+  --ansi-4: #1d4ed8;
+  --ansi-5: #a21caf;
+  --ansi-6: #0e7490;
+  --ansi-7: #525252;
+  --ansi-8: #737373;
+  --ansi-9: #dc2626;
+  --ansi-10: #16a34a;
+  --ansi-11: #ca8a04;
+  --ansi-12: #2563eb;
+  --ansi-13: #c026d3;
+  --ansi-14: #0891b2;
+  --ansi-15: #171717;
+
+  --glass-blur: 12px;
+  --glass-tint: transparent;
+
+  --space: oklch(0.975 0 0);
+  --star: oklch(0.45 0 0);
+  --orbit: oklch(0.45 0 0 / 0.18);
+  --planet-light: 68%;
+  --planet-mid: 52%;
+  --planet-shade: 26%;
+  --planet-atmosphere: 0.35;
+
+  --holo-space: #0b0b0b;
+  --holo-primary: oklch(0.8 0.15 45);
+  --holo-secondary: oklch(0.74 0 0);
+  --holo-text: oklch(0.97 0 0);
+  --holo-dim: oklch(0.56 0 0);
+  --holo-glow: 0.5;
+
+  /* Code syntax, and JSON Canvas colours 1-6 (red, orange, yellow, green, cyan, purple). */
+  --syntax-keyword: oklch(0.52 0.22 300);
+  --syntax-string: oklch(0.52 0.15 150);
+  --syntax-number: oklch(0.58 0.14 85);
+  --syntax-function: oklch(0.5 0.17 245);
+  --syntax-type: oklch(0.52 0.12 195);
+  --syntax-property: oklch(0.55 0.15 50);
+  --syntax-constant: oklch(0.56 0.19 38);
+  --syntax-tag: oklch(0.54 0.21 350);
+  --canvas-color-1: oklch(0.56 0.21 25);
+  --canvas-color-2: oklch(0.63 0.18 50);
+  --canvas-color-3: oklch(0.7 0.15 85);
+  --canvas-color-4: oklch(0.58 0.16 150);
+  --canvas-color-5: oklch(0.56 0.14 240);
+  --canvas-color-6: oklch(0.54 0.21 300);
+
+  --button-fill: linear-gradient(to bottom, #d24c11, #b03b0b);
+  --button-fill-hover: linear-gradient(to bottom, #f06a28, #a3330a);
+  --button-foreground: #ffffff;
+  --button-edge-top: oklch(1 0 0 / 0.2);
+  --button-edge-bottom: oklch(0 0 0 / 0.18);
+  --button-border: #8c2f07;
+}

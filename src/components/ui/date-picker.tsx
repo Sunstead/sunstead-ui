@@ -19,11 +19,14 @@ function formatDay(d: Date): string {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
 }
 
-/** `Tue 10 Nov 2026`. */
+/** `Tue, Nov 10, 2026`. */
 function dayLabel(d: Date): string {
-  const part = (o: Intl.DateTimeFormatOptions) =>
-    new Intl.DateTimeFormat("en-GB", o).format(d)
-  return `${part({ weekday: "short" })} ${d.getDate()} ${part({ month: "short" })} ${d.getFullYear()}`
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(d)
 }
 
 /**
