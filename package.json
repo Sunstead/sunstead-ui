@@ -2,7 +2,7 @@
   "name": "@sunstead/ui",
   "private": true,
   "license": "MIT",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "description": "Shared Sunstead UI: themes, tokens and shadcn primitives on Base UI. Source-only; apps compile it.",
   "exports": {
@@ -16,7 +16,8 @@
     "./brand/*": "./src/assets/brand/*.svg",
     "./product-icon": "./src/components/product-icon.tsx",
     "./sunstead-mark": "./src/components/brand/sunstead.tsx",
-    "./products": "./src/lib/products.ts"
+    "./products": "./src/lib/products.ts",
+    "./pdf": "./src/components/pdf/pdf-viewer.tsx"
   },
   "files": [
     "src",
@@ -38,7 +39,9 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.4.0",
+    "pdfjs-dist": "5.4.296",
     "react-day-picker": "^10.0.2",
+    "react-pdf": "10.5.0",
     "shadcn": "^4.11.0",
     "sonner": "^2.0.8",
     "tailwind-merge": "^3.6.0",

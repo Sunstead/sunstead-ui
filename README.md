@@ -42,7 +42,7 @@ import { Button } from '@sunstead/ui/components/button';
 ```
 
 - **Exports:** `styles.css`, `themes`, `theme-provider`, `use-theme`,
-  `utils`, `components/<name>`, `hooks/<name>`.
+  `utils`, `components/<name>`, `hooks/<name>`, `pdf`.
 - **Peers:** react 19, react-dom, tailwindcss 4, lucide-react 1.
 - **Each app's `index.html`** paints the stored theme before any script
   runs, from its own copy of the theme ids (`storageKeys(app)` names the
@@ -65,6 +65,58 @@ import { Button } from '@sunstead/ui/components/button';
   inner element instead (`*:data-[sidebar=sidebar]:overflow-hidden`).
 - **Working across repos:** `npm link` this repo into the app, or point the
   dependency at `file:../sunstead-ui` locally. Never commit a `file:` path.
+
+## PDF viewer
+
+`@sunstead/ui/pdf` is a pdf.js viewer (react-pdf 10.5.0 on pdfjs-dist
+5.4.296, pinned together). It is its own entry point, so an app that never
+imports it never bundles pdf.js. Lazy-load it:
+
+```tsx
+const PdfViewer = lazy(() => import('@sunstead/ui/pdf').then((m) => ({ default: m.PdfViewer })));
+
+<PdfViewer
+  url='/v1/items/abc/blob'
+  title='Report.pdf'
+  initialFind='quarterly'
+  cMapUrl='/pdfjs/cmaps/'
+  standardFontDataUrl='/pdfjs/standard_fonts/'
+/>
+```
+
+| Prop | |
+| --- | --- |
+| `url` | The PDF. Fetched by pdf.js with the page's cookies. A new URL starts over. |
+| `title` | The document's name, for screen readers. |
+| `initialFind` | Opens find on this text, at the first match. A new value searches again. |
+| `cMapUrl` | Where the app serves `pdfjs-dist/cmaps/`, ending in `/`. |
+| `standardFontDataUrl` | Where the app serves `pdfjs-dist/standard_fonts/`, ending in `/`. |
+| `className` | On the viewer's root. It fills its parent, so give the parent a height. |
+
+- **Serve the cmaps and standard fonts.** Copy `node_modules/pdfjs-dist/cmaps`
+  and `standard_fonts` into the app's static files (with
+  `vite-plugin-static-copy`, or a copy step in the build) and pass their URLs.
+  Without them, PDFs in CJK and other non-Latin encodings, and PDFs that use
+  the standard 14 fonts without embedding them, render with missing or wrong
+  glyphs.
+- **The worker** is bundled from `pdfjs-dist/build/pdf.worker.min.mjs` by
+  `new URL(..., import.meta.url)` (`src/components/pdf/worker.ts`), which
+  Vite turns into a chunk. No CDN.
+- **What it does:** pages virtualized as you scroll (exact-size placeholders);
+  fit page (the default), fit width, or zoom from 20% to 600% with the
+  buttons, Ctrl/Cmd+wheel or a pinch; PageUp/PageDown and Home/End; find
+  (Cmd/Ctrl-F inside the viewer, Enter and Shift+Enter, Escape to close);
+  page thumbnails and the outline in a side rail; internal links scroll,
+  external links open in a new tab; password PDFs ask inline; a file that
+  fails shows a Retry button.
+- **Dim pages** inverts page canvases (`invert(0.88) hue-rotate(180deg)`) for
+  dark themes. It follows the theme (on when `useTheme()` is dark, or the
+  system is, without a provider) until the reader toggles it; the choice is
+  kept in localStorage as `sunstead-pdf-dim`.
+- **Peers:** the app needs nothing more than the other exports do; react-pdf
+  and pdfjs-dist come with this package. Their CSS (text and annotation
+  layers) is imported by the viewer, so the app's bundler must handle CSS
+  imports from dependencies (Vite does).
 
 ## Developing
 

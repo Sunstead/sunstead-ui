@@ -49,6 +49,36 @@ npx shadcn@latest add <component> --overwrite
     `time-picker` are Sunstead's own, built on it and `popover`: values are
     `YYYY-MM-DD` and `HH:MM` strings, and the time picker reads typed times
     (`4pm`, `930`).
+- **PDF viewer** (`src/components/pdf/`, exported alone as `@sunstead/ui/pdf`
+  so pdf.js stays out of apps that don't use it). Ported from Solstice's
+  viewer (`apps/desktop/src/components/viewer/pdf-*.tsx`, `lib/pdf/*`), with
+  Solstice's find store, command registry and Milkdown search replaced by
+  `use-pdf-find.ts` and a plain case-insensitive matcher (`search.ts`).
+  - `react-pdf` and `pdfjs-dist` are pinned exactly and must move together:
+    `pdfjs-dist` is the version react-pdf depends on, or the API and the
+    worker disagree at runtime (`worker.ts`).
+  - Apps serve `pdfjs-dist/cmaps/` and `standard_fonts/` and pass
+    `cMapUrl` and `standardFontDataUrl`; the viewer memoizes `options` and
+    `file` (react-pdf reloads on a new identity).
+  - Virtualization: exact-size placeholders (every page's size is read up
+    front), an IntersectionObserver at `200%` rootMargin, the two pages
+    either side of the current one always mounted, and a middle-band
+    observer for the current page. Thumbnails are virtualized the same way.
+  - Zoom: fit page (default), fit width, custom 0.2 to 6. Ctrl/Cmd+wheel and
+    pinch preview with a CSS transform on the column and land on the real
+    scale when the gesture settles (`use-pdf-zoom.ts`).
+  - Find highlights are `<mark>`s from `customTextRenderer`, placed by glyph
+    widths (`glyph-offsets.ts`, needs `fontExtraProperties`) and styled
+    inline from `--primary`, so the package ships no stylesheet.
+  - react-pdf keeps the first `onItemClick` it gets, so link handling reads
+    the scroller and document through refs, never render state.
+  - Scrolling uses `scrollWithin` (`scroll.ts`), not `scrollIntoView`, so a
+    viewer in a pane never scrolls the app around it.
+  - Dim pages: canvases only, plus blank sheets (`data-sheet`) in the
+    colour white dims to. Follows the theme until toggled, then
+    localStorage `sunstead-pdf-dim`.
+  - Tests cover the pure parts: zoom maths, output scale, find matching,
+    glyph offsets and outline destinations.
 - **Themes:** one `[data-theme='<id>']` block in `src/themes/<file>.css`,
   imported from `styles.css`, plus an entry in `src/lib/themes.ts`. Every
   theme defines exactly the same tokens as `sunstead-dark`
