@@ -106,8 +106,10 @@ and the Sunstead mark (`sunstead.svg`). Change an icon here and everything that
 shows it follows: `ProductIcon` (`@sunstead/ui/product-icon`), `SunsteadMark`
 (`@sunstead/ui/sunstead-mark`), the raw files (`@sunstead/ui/brand/<id>`) and
 the website, which copies them (`npm run sync:icons` there). Solstice, Solstice
-Sync and Atlas draw theirs in their own repos; `npm run sync:brand` copies them
-in from sibling checkouts. Helion's tile, Swindle Games' and the mark are edited
+Sync and Atlas draw theirs in their own repos (Atlas's tile is `icon_app_3.svg`,
+the selected candidate, until it is renamed to `icon_app.svg`; its `icon.svg`
+is the transparent mark for app chrome); `npm run sync:brand` copies them in
+from sibling checkouts. Helion's tile, Swindle Games' and the mark are edited
 here. `npm run build:brand` turns the SVGs into `src/components/brand/*.tsx`
 (generated, committed) so consumers need no SVG loader; ids are prefixed per
 icon. `PRODUCTS` lists the products (`@sunstead/ui/products`). An SVG comment

@@ -19,7 +19,7 @@ const code = path.resolve(root, '..');
 const SOURCES = {
   solstice: 'Solstice/apps/desktop/src/assets/icons/app/icon_square.svg',
   'solstice-sync': 'Solstice/apps/sync/icon.svg',
-  atlas: 'Atlas/app/public/icon.svg',
+  atlas: 'Atlas/app/public/icon_app_3.svg',
 };
 
 for (const [id, rel] of Object.entries(SOURCES)) {
