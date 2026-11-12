@@ -2,10 +2,10 @@
 import type { SVGProps } from 'react';
 export function AtlasMark(props: SVGProps<SVGSVGElement>) {
   return <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" {...props}><defs><linearGradient id="sunstead-atlas-a"><stop offset={0} style={{
-          stopColor: "#ff2824",
+          stopColor: "#686eff",
           stopOpacity: 1
         }} /><stop offset={1} style={{
-          stopColor: "#ff3e31",
+          stopColor: "#7586ff",
           stopOpacity: 1
         }} /></linearGradient><linearGradient xlinkHref="#sunstead-atlas-a" id="sunstead-atlas-b" x1={8} x2={8} y1={16} y2={0} gradientUnits="userSpaceOnUse" /></defs><rect width={16} height={16} ry={4} style={{
       fill: "url(#sunstead-atlas-b)",

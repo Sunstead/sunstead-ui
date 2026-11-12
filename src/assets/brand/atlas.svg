@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="18.384776"
-     inkscape:cx="-4.6505869"
-     inkscape:cy="7.7237818"
+     inkscape:zoom="26"
+     inkscape:cx="-2.3653846"
+     inkscape:cy="8.8461538"
      inkscape:current-layer="layer1"
      showgrid="false">
     <inkscape:grid
@@ -50,11 +50,11 @@
        id="linearGradient1"
        inkscape:collect="always">
       <stop
-         style="stop-color:#ff2824;stop-opacity:1;"
+         style="stop-color:#686eff;stop-opacity:1;"
          offset="0"
          id="stop1" />
       <stop
-         style="stop-color:#ff3e31;stop-opacity:1;"
+         style="stop-color:#7586ff;stop-opacity:1;"
          offset="1"
          id="stop2" />
     </linearGradient>

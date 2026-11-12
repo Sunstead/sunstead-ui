@@ -34,7 +34,7 @@ export interface ThemeDef {
 
 export const THEMES: readonly ThemeDef[] = [
   // Dark
-  { id: 'atlas-dark', name: 'Atlas Dark', scheme: 'dark', style: 'rounded', description: 'Warm black, signal red' },
+  { id: 'atlas-dark', name: 'Atlas Dark', scheme: 'dark', style: 'rounded', description: 'Warm black, signal blurple' },
   { id: 'sunstead-dark', name: 'Sunstead Dark', scheme: 'dark', style: 'rounded', description: 'Near-black space, crisp white' },
   { id: 'nebula', name: 'Nebula', scheme: 'dark', style: 'rounded', description: 'Deep violet with a magenta glow' },
   { id: 'aurora', name: 'Aurora', scheme: 'dark', style: 'rounded', description: 'Polar night, mint and violet' },
@@ -50,7 +50,7 @@ export const THEMES: readonly ThemeDef[] = [
   { id: 'terminal', name: 'Terminal', scheme: 'dark', style: 'tech', description: 'Phosphor green on black' },
   { id: 'red-alert', name: 'Red Alert', scheme: 'dark', style: 'tech', description: 'Bridge black, crimson alarm' },
   // Light
-  { id: 'atlas-light', name: 'Atlas Light', scheme: 'light', style: 'rounded', description: 'Warm white, signal red' },
+  { id: 'atlas-light', name: 'Atlas Light', scheme: 'light', style: 'rounded', description: 'Warm white, signal blurple' },
   { id: 'sunstead-light', name: 'Sunstead Light', scheme: 'light', style: 'rounded', description: 'Clean white, ink black' },
   { id: 'solar', name: 'Solar', scheme: 'light', style: 'rounded', description: 'Warm cream and amber' },
   { id: 'lunar', name: 'Lunar', scheme: 'light', style: 'rounded', description: 'Cool grey with slate blue' },
