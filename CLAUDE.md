@@ -48,7 +48,8 @@ npx shadcn@latest add <component> --overwrite
   - `calendar` is shadcn's (react-day-picker). `date-picker` and
     `time-picker` are Sunstead's own, built on it and `popover`: values are
     `YYYY-MM-DD` and `HH:MM` strings, and the time picker reads typed times
-    (`4pm`, `930`).
+    (`4pm`, `930`) and shows them on a 24-hour clock, or a 12-hour one
+    with `hourCycle={12}`.
 - **PDF viewer** (`src/components/pdf/`, exported alone as `@sunstead/ui/pdf`
   so pdf.js stays out of apps that don't use it). Ported from Solstice's
   viewer (`apps/desktop/src/components/viewer/pdf-*.tsx`, `lib/pdf/*`), with

@@ -47,4 +47,12 @@ describe("time picker", () => {
     expect(formatTime("16:30")).toBe("16:30")
     expect(renderToStaticMarkup(<TimePicker value="09:15" onChange={() => {}} />)).toContain("09:15")
   })
+
+  it("shows a 12-hour clock when asked, keeping HH:MM values", () => {
+    expect(formatTime("16:30", 12)).toBe("4:30 PM")
+    expect(formatTime("09:00", 12)).toBe("9 AM")
+    expect(formatTime("00:15", 12)).toBe("12:15 AM")
+    expect(formatTime("12:00", 12)).toBe("12 PM")
+    expect(renderToStaticMarkup(<TimePicker value="21:45" hourCycle={12} onChange={() => {}} />)).toContain("9:45 PM")
+  })
 })

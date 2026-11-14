@@ -31,8 +31,16 @@ function parseTime(typed: string): string | null {
   return `${pad(h)}:${pad(min)}`
 }
 
-function formatTime(value: string): string {
-  return value
+/**
+ * `HH:MM` for showing: as it is on a 24-hour clock, `2:30 PM` on a
+ * 12-hour one (`9 AM` on the hour).
+ */
+function formatTime(value: string, hourCycle: 12 | 24 = 24): string {
+  if (hourCycle === 24) return value
+  const [h, m] = value.split(":").map(Number)
+  if (h === undefined || m === undefined || Number.isNaN(h) || Number.isNaN(m)) return value
+  const hour = h % 12 === 0 ? 12 : h % 12
+  return `${hour}${m === 0 ? "" : `:${pad(m)}`} ${h < 12 ? "AM" : "PM"}`
 }
 
 /** Every time of day `step` minutes apart, from midnight. */
@@ -53,6 +61,7 @@ function TimePicker({
   placeholder = "Time",
   disabled,
   className,
+  hourCycle = 24,
   "aria-label": ariaLabel,
 }: {
   value: string | null
@@ -62,6 +71,8 @@ function TimePicker({
   placeholder?: string
   disabled?: boolean
   className?: string
+  /** How times are shown; values stay `HH:MM` either way. */
+  hourCycle?: 12 | 24
   "aria-label"?: string
 }) {
   const [open, setOpen] = React.useState(false)
@@ -107,7 +118,7 @@ function TimePicker({
         }
       >
         <ClockIcon className="text-muted-foreground" />
-        {value ? formatTime(value) : placeholder}
+        {value ? formatTime(value, hourCycle) : placeholder}
       </PopoverTrigger>
       <PopoverContent className="w-44 p-1.5" align="start">
         <Input
@@ -127,7 +138,7 @@ function TimePicker({
         />
         {typed.trim() !== "" && (
           <p className="px-1 pt-1 text-xs text-muted-foreground">
-            {parsed ? `Enter for ${parsed}` : "Not a time yet"}
+            {parsed ? `Enter for ${formatTime(parsed, hourCycle)}` : "Not a time yet"}
           </p>
         )}
         <div
@@ -149,7 +160,7 @@ function TimePicker({
                 t === value && "bg-primary text-primary-foreground hover:bg-primary"
               )}
             >
-              {t}
+              {formatTime(t, hourCycle)}
             </button>
           ))}
         </div>
