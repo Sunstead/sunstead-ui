@@ -39,6 +39,7 @@
 @import './themes/orchard.css';
 @import './themes/brutalist.css';
 @import './themes/bubblegum.css';
+@import './themes/ldca.css';
 
 @custom-variant dark (&:is(.dark *));
 

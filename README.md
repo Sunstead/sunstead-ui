@@ -7,13 +7,13 @@ colour neutral). The look is Solstice's: its components came in as they were.
 
 ## Themes
 
-24 themes, grouped by scheme only. A tech theme (Hologram, Terminal, Red
+26 themes, grouped by scheme only. A tech theme (Hologram, Terminal, Red
 Alert, Blueprint) is square, mono and bracketed, but sits under Dark or Light
 with the rest, and Follow system can pair it.
 
 - **Dark:** Atlas Dark, Sunstead Dark, Nebula, Aurora, Mars, Event Horizon, Eclipse,
-  Deep Field, Stone, Ember, Concrete, Inferno, Hologram, Terminal, Red Alert.
-- **Light:** Atlas Light, Sunstead Light, Solar, Lunar, Comet, Orchard, Brutalist,
+  Deep Field, LDCA Dark, Stone, Ember, Concrete, Inferno, Hologram, Terminal, Red Alert.
+- **Light:** Atlas Light, Sunstead Light, LDCA Light, Solar, Lunar, Comet, Orchard, Brutalist,
   Bubblegum, Blueprint.
 
 ## Using it

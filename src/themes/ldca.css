@@ -1,0 +1,226 @@
+/* LDCA Dark and LDCA Light (Sunstead LDCA, the room-lights agent).
+   Studio grey: every surface sits at chroma 0, the way a grading suite is
+   painted neutral grey, so nothing tints how a light's own colour reads. The
+   app draws light colours (swatches, the hue wheel, the 70-LED strip) inline;
+   the theme stays out of their way. The primary is plain ink, white in dark
+   and graphite in light, bevelled through the --button-* tokens. The sidebar
+   is a clear step darker than the page, and the light theme sits on a soft
+   grey ground with near-white cards rather than pure white, so a lit swatch
+   is the brightest thing on screen. Status and metric colours are Stone's in
+   dark and Lunar's in light, which already keep their distances. */
+
+[data-theme='ldca-dark'] {
+  --radius: 0.75rem;
+  --background: oklch(0.215 0 0);
+  --foreground: oklch(0.965 0 0);
+  --card: oklch(0.25 0 0);
+  --card-foreground: oklch(0.965 0 0);
+  --popover: oklch(0.27 0 0);
+  --popover-foreground: oklch(0.965 0 0);
+  --primary: oklch(0.95 0 0);
+  --primary-foreground: oklch(0.19 0 0);
+  --secondary: oklch(0.29 0 0);
+  --secondary-foreground: oklch(0.965 0 0);
+  --muted: oklch(0.275 0 0);
+  --muted-foreground: oklch(0.74 0 0);
+  --accent: oklch(0.3 0 0);
+  --accent-foreground: oklch(0.965 0 0);
+  --destructive: oklch(0.68 0.19 25);
+  --border: oklch(1 0 0 / 8%);
+  --border-color: oklch(1 0 0);
+  --border-opacity: 8%;
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.62 0 0);
+  --chart-1: oklch(0.92 0 0);
+  --chart-2: oklch(0.76 0 0);
+  --chart-3: oklch(0.6 0 0);
+  --chart-4: oklch(0.46 0 0);
+  --chart-5: oklch(0.34 0 0);
+  --sidebar: oklch(0.14 0 0);
+  --sidebar-foreground: oklch(0.82 0 0);
+  --sidebar-primary: oklch(0.95 0 0);
+  --sidebar-primary-foreground: oklch(0.19 0 0);
+  --sidebar-accent: oklch(0.26 0 0);
+  --sidebar-accent-foreground: oklch(0.965 0 0);
+  --sidebar-border: oklch(1 0 0 / 6%);
+  --sidebar-ring: oklch(0.62 0 0);
+
+  --button-fill: linear-gradient(to bottom, oklch(0.99 0 0), oklch(0.87 0 0));
+  --button-fill-hover: linear-gradient(to bottom, oklch(1 0 0), oklch(0.91 0 0));
+  --button-foreground: oklch(0.18 0 0);
+  --button-edge-top: oklch(1 0 0 / 0.9);
+  --button-edge-bottom: oklch(0 0 0 / 0.25);
+  --button-border: oklch(0.1 0 0);
+
+  --success: oklch(0.72 0.17 145);
+  --warning: oklch(0.78 0.15 75);
+  --error: oklch(0.67 0.22 10);
+
+  --cpu: oklch(0.72 0.12 235);
+  --ram: oklch(0.7 0.17 320);
+  --network: oklch(0.8 0.13 175);
+  --disk: oklch(0.66 0.17 35);
+
+  --mark-0: #ffffff;
+  --mark-1: #a1a1a1;
+
+  --ansi-0: #52525b;
+  --ansi-1: #f87171;
+  --ansi-2: #4ade80;
+  --ansi-3: #facc15;
+  --ansi-4: #60a5fa;
+  --ansi-5: #e879f9;
+  --ansi-6: #22d3ee;
+  --ansi-7: #d4d4d8;
+  --ansi-8: #a1a1aa;
+  --ansi-9: #fca5a5;
+  --ansi-10: #86efac;
+  --ansi-11: #fde047;
+  --ansi-12: #93c5fd;
+  --ansi-13: #f0abfc;
+  --ansi-14: #67e8f9;
+  --ansi-15: #fafafa;
+
+  --glass-blur: 16px;
+  --glass-tint: oklch(1 0 0 / 0.02);
+
+  --space: #040404;
+  --star: oklch(0.92 0 0);
+  --orbit: oklch(0.9 0 0 / 0.1);
+  --planet-light: 72%;
+  --planet-mid: 50%;
+  --planet-shade: 12%;
+  --planet-atmosphere: 0.5;
+
+  /* The constellation: a touch deeper than the page, in neutral whites. */
+  --holo-space: #010101;
+  --holo-primary: oklch(0.9 0 0);
+  --holo-secondary: oklch(0.76 0 0);
+  --holo-text: oklch(0.97 0 0);
+  --holo-dim: oklch(0.55 0 0);
+  --holo-glow: 0.5;
+
+  /* Code syntax, and JSON Canvas colours 1-6 (red, orange, yellow, green, cyan, purple). */
+  --syntax-keyword: oklch(0.78 0.15 275);
+  --syntax-string: oklch(0.78 0.13 150);
+  --syntax-number: oklch(0.8 0.13 95);
+  --syntax-function: oklch(0.75 0.14 225);
+  --syntax-type: oklch(0.78 0.11 190);
+  --syntax-property: oklch(0.78 0.15 305);
+  --syntax-constant: oklch(0.8 0.14 48);
+  --syntax-tag: oklch(0.76 0.17 340);
+  --canvas-color-1: oklch(0.72 0.17 25);
+  --canvas-color-2: oklch(0.77 0.14 55);
+  --canvas-color-3: oklch(0.82 0.13 90);
+  --canvas-color-4: oklch(0.76 0.14 145);
+  --canvas-color-5: oklch(0.78 0.11 205);
+  --canvas-color-6: oklch(0.72 0.16 300);
+}
+
+[data-theme='ldca-light'] {
+  --radius: 0.75rem;
+  --background: oklch(0.945 0 0);
+  --foreground: oklch(0.2 0 0);
+  --card: oklch(0.99 0 0);
+  --card-foreground: oklch(0.2 0 0);
+  --popover: oklch(0.995 0 0);
+  --popover-foreground: oklch(0.2 0 0);
+  --primary: oklch(0.22 0 0);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.905 0 0);
+  --secondary-foreground: oklch(0.2 0 0);
+  --muted: oklch(0.905 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.89 0 0);
+  --accent-foreground: oklch(0.2 0 0);
+  --destructive: oklch(0.55 0.2 25);
+  --border: oklch(0 0 0 / 9%);
+  --border-color: oklch(0 0 0);
+  --border-opacity: 9%;
+  --input: oklch(0.82 0 0);
+  --ring: oklch(0.55 0 0);
+  --chart-1: oklch(0.82 0 0);
+  --chart-2: oklch(0.66 0 0);
+  --chart-3: oklch(0.52 0 0);
+  --chart-4: oklch(0.38 0 0);
+  --chart-5: oklch(0.24 0 0);
+  --sidebar: oklch(0.875 0 0);
+  --sidebar-foreground: oklch(0.3 0 0);
+  --sidebar-primary: oklch(0.22 0 0);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.985 0 0);
+  --sidebar-accent-foreground: oklch(0.2 0 0);
+  --sidebar-border: oklch(0 0 0 / 8%);
+  --sidebar-ring: oklch(0.55 0 0);
+
+  --button-fill: linear-gradient(to bottom, oklch(0.34 0 0), oklch(0.2 0 0));
+  --button-fill-hover: linear-gradient(to bottom, oklch(0.4 0 0), oklch(0.24 0 0));
+  --button-foreground: oklch(0.98 0 0);
+  --button-edge-top: oklch(1 0 0 / 0.18);
+  --button-edge-bottom: oklch(0 0 0 / 0.3);
+  --button-border: oklch(0.15 0 0);
+
+  --success: oklch(0.51 0.13 148);
+  --warning: oklch(0.53 0.12 90);
+  --error: oklch(0.5 0.2 22);
+
+  --cpu: oklch(0.48 0.14 258);
+  --ram: oklch(0.5 0.18 325);
+  --network: oklch(0.52 0.1 195);
+  --disk: oklch(0.6 0.16 50);
+
+  --mark-0: #3c3c3c;
+  --mark-1: #000000;
+
+  --ansi-0: #3f3f46;
+  --ansi-1: #b91c1c;
+  --ansi-2: #15803d;
+  --ansi-3: #a16207;
+  --ansi-4: #1d4ed8;
+  --ansi-5: #a21caf;
+  --ansi-6: #0e7490;
+  --ansi-7: #52525b;
+  --ansi-8: #71717a;
+  --ansi-9: #dc2626;
+  --ansi-10: #16a34a;
+  --ansi-11: #ca8a04;
+  --ansi-12: #2563eb;
+  --ansi-13: #c026d3;
+  --ansi-14: #0891b2;
+  --ansi-15: #18181b;
+
+  --glass-blur: 12px;
+  --glass-tint: oklch(0.98 0 0 / 0.3);
+
+  --space: oklch(0.94 0 0);
+  --star: oklch(0.45 0 0);
+  --orbit: oklch(0.45 0 0 / 0.18);
+  --planet-light: 66%;
+  --planet-mid: 50%;
+  --planet-shade: 24%;
+  --planet-atmosphere: 0.3;
+
+  /* The constellation: a dark viewport even here, in neutral greys. */
+  --holo-space: #0c0c0c;
+  --holo-primary: oklch(0.88 0 0);
+  --holo-secondary: oklch(0.74 0 0);
+  --holo-text: oklch(0.97 0 0);
+  --holo-dim: oklch(0.56 0 0);
+  --holo-glow: 0.5;
+
+  /* Code syntax, and JSON Canvas colours 1-6 (red, orange, yellow, green, cyan, purple). */
+  --syntax-keyword: oklch(0.48 0.152 282);
+  --syntax-string: oklch(0.47 0.104 178);
+  --syntax-number: oklch(0.53 0.124 74);
+  --syntax-function: oklch(0.485 0.142 248);
+  --syntax-type: oklch(0.5 0.098 202);
+  --syntax-property: oklch(0.495 0.15 320);
+  --syntax-constant: oklch(0.535 0.138 44);
+  --syntax-tag: oklch(0.505 0.166 16);
+  --canvas-color-1: oklch(0.545 0.184 22);
+  --canvas-color-2: oklch(0.59 0.148 58);
+  --canvas-color-3: oklch(0.645 0.128 96);
+  --canvas-color-4: oklch(0.545 0.126 162);
+  --canvas-color-5: oklch(0.545 0.114 246);
+  --canvas-color-6: oklch(0.52 0.158 300);
+}

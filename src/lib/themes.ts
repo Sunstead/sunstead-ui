@@ -42,6 +42,7 @@ export const THEMES: readonly ThemeDef[] = [
   { id: 'event-horizon', name: 'Event Horizon', scheme: 'dark', style: 'rounded', description: 'True black, hot orange' },
   { id: 'eclipse', name: 'Eclipse', scheme: 'dark', style: 'rounded', description: 'Graphite with a gold corona' },
   { id: 'deep-field', name: 'Deep Field', scheme: 'dark', style: 'rounded', description: 'Navy dark, ice-blue light' },
+  { id: 'ldca-dark', name: 'LDCA Dark', scheme: 'dark', style: 'rounded', description: 'Studio grey, white ink' },
   { id: 'stone', name: 'Stone', scheme: 'dark', style: 'rounded', description: 'Plain grey, one indigo accent' },
   { id: 'ember', name: 'Ember', scheme: 'dark', style: 'rounded', description: 'Warm charcoal and amber' },
   { id: 'concrete', name: 'Concrete', scheme: 'dark', style: 'rounded', description: 'Raw grey, poster yellow, square' },
@@ -52,6 +53,7 @@ export const THEMES: readonly ThemeDef[] = [
   // Light
   { id: 'atlas-light', name: 'Atlas Light', scheme: 'light', style: 'rounded', description: 'Warm white, signal blurple' },
   { id: 'sunstead-light', name: 'Sunstead Light', scheme: 'light', style: 'rounded', description: 'Clean white, ink black' },
+  { id: 'ldca-light', name: 'LDCA Light', scheme: 'light', style: 'rounded', description: 'Soft studio grey, graphite ink' },
   { id: 'solar', name: 'Solar', scheme: 'light', style: 'rounded', description: 'Warm cream and amber' },
   { id: 'lunar', name: 'Lunar', scheme: 'light', style: 'rounded', description: 'Cool grey with slate blue' },
   { id: 'comet', name: 'Comet', scheme: 'light', style: 'rounded', description: 'Bright ice-white, teal tail' },
